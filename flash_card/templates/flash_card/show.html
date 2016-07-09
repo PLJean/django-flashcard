@@ -1,0 +1,15 @@
+{% block body %}
+    {% for card in cards %}
+        <div class="row list-flashcards">
+                <div>
+                    <div class="col-lg-6">{{ card.front }}</div>
+                    <div class="col-lg-6">{{ card.back }} </div>
+                </div>
+        </div>
+    {% endfor %}
+{#    <p href="{% url 'flash_card:edit' set_id %}" class="btn btn-default" id="menu-toggle">Toggle</p>#}
+    <form action="% url 'flash_card:edit' set_id %}" method="POST">
+        <input id="submit" type="button" value="Edit">
+    </form>
+
+{% endblock %}

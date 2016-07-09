@@ -1,0 +1,49 @@
+{%  extends 'flash_card/root_template.html' %}
+
+{% block body %}
+    <div id="set_list">
+        {% for card in cards %}
+            <div class="container-fluid">
+                <div class="row card">
+{#                    <a class="counter">{{ forloop.counter }}</a>#}
+                    <div class="card-content">
+                        <div class="col-lg-1 counter">{{ forloop.counter }}</div>
+                        <div class="col-lg-5">{{ card.front }}</div>
+                        <div class="col-lg-5">{{ card.back }} </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        <input id="edit" type="button" value="Edit" onclick="toggleForm()">
+    </div>
+
+    <div id="set_form">
+        {% if error_message %}
+            <p><strong>{{ error_message }}</strong></p>
+        {% endif %}
+
+        <form id="container-form" action='{% url 'flash_card:save' set_id %}' method="post">
+            {% csrf_token %}
+            {% for card in cards %}
+                <div class="container-fluid">
+                    <div class="row card">
+                        <div id="card-content">
+                            <div class="col-lg-1 counter">{{ forloop.counter }}</div>
+
+                            <div class="col-lg-5"><input type="text" value="{{ card.front }}" name="card-front-{{ forloop.counter }}"></div>
+
+                            <div class="col-lg-5"> <input type="text" value="{{ card.back }}"  name="card-back-{{ forloop.counter }} ">
+                                {% if cards.count == forloop.counter %}
+                                    <input id="" type="button" value="||" onclick="newRow()">
+                                {% endif %}
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            <input type="submit" value="Save" onclick="toggleList()">
+        </form>
+    </div>
+{% endblock %}
+

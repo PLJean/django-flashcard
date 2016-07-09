@@ -1,0 +1,17 @@
+{% if error_message %}
+    <p><strong>{{ error_message }}</strong></p>
+{% endif %}
+
+<form action='{% url 'flash_card:save' set_id %}' method="post">
+    {% csrf_token %}
+    {% for card in cards %}
+        <div class="row list-flashcards">
+                <div>
+                    <a>{{ forloop.counter }}</a>
+                    <div class="col-lg-6"><input type="text" value="{{ card.front }}" name="card-front-{{ forloop.counter }}"></div>
+                    <div class="col-lg-6"><input type="text" value="{{ card.back }}"  name="card-back-{{ forloop.counter }} "></div>
+                </div>
+        </div>
+    {% endfor %}
+    <input type="submit" value="Save">
+</form>

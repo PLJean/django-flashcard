@@ -1,0 +1,23 @@
+.list-flashcard {
+    background: black;
+    color: white;
+}
+
+.list-flashcard:nth-child(odd) {
+    background: white;
+    color: black;
+}
+
+#top-nav {
+    margin-bottom: 0px;
+    background-color: black;
+    border-radius: 0px;
+}
+
+#set_list {
+    display: block;
+}
+
+#set_form {
+    display: none;
+}

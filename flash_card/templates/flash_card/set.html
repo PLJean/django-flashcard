@@ -1,7 +1,7 @@
 {%  extends 'flash_card/root_template.html' %}
 
 {% block body %}
-    <div id="set_list">
+    <div id="set-list">
         {% for card in cards %}
             <div class="container-fluid">
                 <div class="row card">
@@ -14,36 +14,10 @@
                 </div>
             </div>
         {% endfor %}
-        <input id="edit" type="button" value="Edit" onclick="toggleForm()">
-    </div>
-
-    <div id="set_form">
-        {% if error_message %}
-            <p><strong>{{ error_message }}</strong></p>
-        {% endif %}
-
-        <form id="container-form" action='{% url 'flash_card:save' set_id %}' method="post">
-            {% csrf_token %}
-            {% for card in cards %}
-                <div class="container-fluid">
-                    <div class="row card">
-                        <div id="card-content">
-                            <div class="col-lg-1 counter">{{ forloop.counter }}</div>
-
-                            <div class="col-lg-5"><input type="text" value="{{ card.front }}" name="card-front-{{ forloop.counter }}"></div>
-
-                            <div class="col-lg-5"> <input type="text" value="{{ card.back }}"  name="card-back-{{ forloop.counter }} ">
-                                {% if cards.count == forloop.counter %}
-                                    <input id="" type="button" value="||" onclick="newRow()">
-                                {% endif %}
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            {% endfor %}
-            <input type="submit" value="Save" onclick="toggleList()">
-        </form>
+{#        <form method="GET" action="{% url 'flash_card:edit' set_id %}">#}
+{#            <input id="edit" type="submit" value="Edit">#}
+{#        </form>#}
+    <a class="btn" href="{% url 'flash_card:edit' set_id %}">Edit</a>
     </div>
 {% endblock %}
 

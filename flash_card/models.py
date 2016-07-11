@@ -21,4 +21,4 @@ class Card(models.Model):
     back = models.CharField(max_length=256)
 
     def __str__(self):
-        return "{" + self.front + ", " +  self.back + "}"
+        return "(" + self.front + ", " +  self.back + ")"

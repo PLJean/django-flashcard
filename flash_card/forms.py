@@ -1,5 +1,12 @@
-from django import forms
+from django.forms import ModelForm
 
-class FlashCardForm(forms.Form) :
-    def __init__(self, *args, **kwar):
-        pass
+from .models import Set, Card
+
+
+class CardForm(ModelForm):
+
+    class Meta:
+        model = Card
+        fields = ['front', 'back']
+
+

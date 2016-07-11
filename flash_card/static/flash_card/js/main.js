@@ -7,16 +7,16 @@ var cardTemplate = '<div class="container-fluid">' +
     '</div></div></div></div>';
 
 
-function toggleList() {
-    $('#set_list').css('display', 'block');
-    $('#set_form').css('display', 'none');
-}
+// function toggleList() {
+//     $('#set-list').css('display', 'block');
+//     $('#set-form').css('display', 'none');
+// }
+//
+// function toggleForm() {
+//     $('#set-list').css('display', 'none');
+//     $('#set-form').css('display', 'block');
+// }
 
-function toggleForm() {
-    $('#set_list').css('display', 'none');
-    $('#set_form').css('display', 'block');
-}
-
-function newRow() {
-    $('.container-form').append(cardTemplate);
-}
+// function newRow() {
+//     $('.container-form').append(cardTemplate);
+// }

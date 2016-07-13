@@ -2,17 +2,35 @@
 
 {% block body %}
 
-    <div id="set-form">
+    <div id="set-edit">
         {% if error_message %}
             <p><strong>{{ error_message }}</strong></p>
         {% endif %}
         <form method="post" action="">
 {#            {{ formset.management_form }}#}
-            <table>
-                {% for form in formset %}
-                    {{ form }}
-                {% endfor %}
-            </table>
+            <div id="set-formset">
+
+                {% with formset|length as formset_length %}
+                    {% for form in formset %}
+
+                        {% if forloop.counter == formset_length %}
+                        <div id="empty_row">
+                        {% endif %}
+
+                            <div class="container-fluid">
+                                {{ form }}
+                            </div>
+
+                        {% if forloop.counter == formset_length %}
+                        </div>
+                        {% endif %}
+
+                    {% endfor %}
+               {% endwith %}
+
+            </div>
+        <a id="newCard-btn btn" onclick="newCard({{ formset|length }})">!!</a>
+
         </form>
     </div>
 {% endblock %}

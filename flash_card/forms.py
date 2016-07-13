@@ -1,9 +1,9 @@
-from django.forms import ModelForm
+from django import forms
 
 from .models import Set, Card
 
 
-class CardForm(ModelForm):
+class CardForm(forms.ModelForm):
 
     class Meta:
         model = Card

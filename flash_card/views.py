@@ -48,21 +48,24 @@ def edit_set(request, set_id):
     CardFormSet = formset_factory(CardForm)
     # for card in current_cards:
 
+    extra_rows = 1
     initial_data = {
-        'form-TOTAL_FORMS': len(current_cards),
+        'form-TOTAL_FORMS': len(current_cards) + extra_rows,
         'form-INITIAL_FORMS': len(current_cards),
         'form-MAX_NUM_FORMS': '',
     }
 
-    for i in range(initial_data['form-TOTAL_FORMS']):
+    for i in range(initial_data['form-TOTAL_FORMS'] - extra_rows):
         front_string = 'form-' + str(i) + '-front'
         back_string = 'form-' + str(i) + '-back'
         initial_data[front_string] = current_cards[i].front
         initial_data[back_string] = current_cards[i].back
 
     formset = CardFormSet(initial_data)
-
-    return render(request, 'flash_card/edit.html', {'all_sets': all_sets, 'cards': current_cards, 'set_id': current_set_id, 'formset': formset})
+    # formset.is_valid()
+    return render(request, 'flash_card/edit.html', {
+        'all_sets': all_sets, 'cards': current_cards, 'set_id': current_set_id, 'formset': formset,
+    })
 
 
 def save_set(request, set_id):

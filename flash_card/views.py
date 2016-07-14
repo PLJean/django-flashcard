@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.contrib import messages
-from .models import Set
+from .models import Set, Card
 from django.shortcuts import render
 from .forms import CardForm
 from django.forms import formset_factory
@@ -30,13 +30,15 @@ def get_all_sets(request):
 def show_set(request, set_id):
     global all_sets, current_cards, current_set_id
     current_cards = Set.objects.get(id=set_id).card_set.all()
-    logger.info(msg='sup')
+    # if len(current_cards) == 0:
+
+    # logger.info(msg='sup')
     current_set_id = set_id
 
     return render(request, 'flash_card/set.html', {'set_id': set_id, 'all_sets': all_sets, 'cards': current_cards})
 
 
-# def add_set(request):
+# def create_set(request):
 #     # todo set creation
 #     Set.objects.create()
 #
@@ -46,8 +48,6 @@ def show_set(request, set_id):
 def edit_set(request, set_id):
     global all_sets, current_cards, current_set_id
     CardFormSet = formset_factory(CardForm)
-    # for card in current_cards:
-
     extra_rows = 1
     initial_data = {
         'form-TOTAL_FORMS': len(current_cards) + extra_rows,
@@ -69,4 +69,26 @@ def edit_set(request, set_id):
 
 
 def save_set(request, set_id):
+    if request.method == 'POST':
+        # Set.objects.get(id=set_id).card_set.all().delete()
+        flash_cards = Set.objects.get(id=set_id)
+        flash_cards.card_set.all().delete()
+        # print(request.POST['form-0-front'])
+        print(flash_cards.card_set.all())
+        i = 0
+        while True:
+            form_front_string = 'form-' + str(i) + '-front'
+            form_back_string = 'form-' + str(i) + '-back'
+            if form_front_string not in request.POST or form_back_string not in request.POST:
+                break
+            if request.POST[form_front_string] != '' and request.POST[form_back_string] != '':
+                Card.objects.create(
+                    front=request.POST[form_front_string],
+                    back=request.POST[form_back_string],
+                    set_id=set_id
+                )
+            i += 1
+        # print(set.card_set.all())
+
     return show_set(request, set_id)
+

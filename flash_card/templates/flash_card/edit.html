@@ -6,7 +6,8 @@
         {% if error_message %}
             <p><strong>{{ error_message }}</strong></p>
         {% endif %}
-        <form method="post" action="">
+        <form action="{% url 'flash_card:save' set_id %}" method="post">
+              {% csrf_token %}
 {#            {{ formset.management_form }}#}
             <div id="set-formset">
 
@@ -14,14 +15,23 @@
                     {% for form in formset %}
 
                         {% if forloop.counter == formset_length %}
-                        <div id="empty_row">
+                        <div class="row card" id="empty_row">
+                        {% else %}
+                        <div class="row card">
                         {% endif %}
-
-                            <div class="container-fluid">
-                                {{ form }}
+                            <div class="card-content">
+                                <div class="col-lg-1 counter">{{ forloop.counter }}</div>
+                                <div class="col-lg-5">{{ form.front }}</div>
+                                <div class="col-lg-5">{{ form.back }} </div>
+                                <div class="col-lg-1">x</div>
                             </div>
+{#                            <div class="container-fluid">#}
+{#                                {{ form.front }}#}
+{#                            </div>#}
 
                         {% if forloop.counter == formset_length %}
+                        </div>
+                        {% else %}
                         </div>
                         {% endif %}
 
@@ -29,8 +39,8 @@
                {% endwith %}
 
             </div>
-        <a id="newCard-btn btn" onclick="newCard({{ formset|length }})">!!</a>
-
+        <a id="newCard-btn" class="btn" onclick="newCard({{ formset|length }})">!!</a>
+        <input type="submit" value="Done"/>
         </form>
     </div>
 {% endblock %}

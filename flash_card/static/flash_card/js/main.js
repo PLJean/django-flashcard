@@ -6,3 +6,8 @@ function newCard() {
     empty_card.attr('class', 'row card new_row');
     $('#set-formset').append(empty_card[0].outerHTML);
 }
+
+function deleteCard(event) {
+    var target = event.target || event.srcElement;
+    target.parentElement.parentElement.remove();
+}

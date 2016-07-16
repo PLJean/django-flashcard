@@ -14,8 +14,15 @@
     border-radius: 0px;
 }
 
-#empty_row {
+#empty_card {
     display: none;
+}
+
+.row.card {
+    padding-top: 10px;
+    margin-top: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
 }
 
 /*#set-list {*/

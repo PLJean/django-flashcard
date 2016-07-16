@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.contrib import messages
 from .models import Set, Card
 from django.shortcuts import render
-from .forms import CardForm
+from .forms import CardForm, SetForm
 from django.forms import formset_factory
 import logging
 
@@ -13,7 +13,7 @@ all_sets = {}
 current_cards = {}
 current_set_id = -1
 # logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
+# logger = logging.getLogger(__name__)
 
 
 def index(request):
@@ -29,42 +29,66 @@ def get_all_sets(request):
 
 def show_set(request, set_id):
     global all_sets, current_cards, current_set_id
-    current_cards = Set.objects.get(id=set_id).card_set.all()
+    set = Set.objects.get(id=set_id)
+    current_cards = set.card_set.all()
+    title = set.name
     # if len(current_cards) == 0:
 
     # logger.info(msg='sup')
     current_set_id = set_id
 
-    return render(request, 'flash_card/set.html', {'set_id': set_id, 'all_sets': all_sets, 'cards': current_cards})
+    return render(request, 'flash_card/set.html', {
+        'set_id': set_id, 'all_sets': all_sets, 'cards': current_cards,
+        'title': title, 'empty_card_index': 0
+    })
 
 
-# def create_set(request):
-#     # todo set creation
-#     Set.objects.create()
-#
-#     edit_set(request)
+def create_set(request):
+    card_form_set = formset_factory(CardForm)
+
+    set_id = len(Set.objects.all()) + 1
+    initial_data = {
+        'form-TOTAL_FORMS': 5,
+        'form-INITIAL_FORMS': 0,
+        'form-MAX_FORMS': '',
+        'form-0-front': 'empty',
+        'form-0-back': 'card',
+    }
+
+    formset = card_form_set(initial_data)
+    title_form = SetForm(initial={'name': ''})
+
+    return render(request, 'flash_card/edit.html', {
+        'all_sets': all_sets, 'cards': current_cards, 'set_id': set_id,
+        'title_form': title_form, 'formset': formset, 'empty_card_index': 0
+    })
 
 
 def edit_set(request, set_id):
     global all_sets, current_cards, current_set_id
-    CardFormSet = formset_factory(CardForm)
-    extra_rows = 1
+    card_form_set = formset_factory(CardForm)
+
     initial_data = {
-        'form-TOTAL_FORMS': len(current_cards) + extra_rows,
+        'form-TOTAL_FORMS': len(current_cards),
         'form-INITIAL_FORMS': len(current_cards),
         'form-MAX_NUM_FORMS': '',
+        'form-0-front': 'empty',
+        'form-0-back': 'card',
     }
 
-    for i in range(initial_data['form-TOTAL_FORMS'] - extra_rows):
+    for i in range(1, initial_data['form-TOTAL_FORMS']):
+        print(i)
         front_string = 'form-' + str(i) + '-front'
         back_string = 'form-' + str(i) + '-back'
-        initial_data[front_string] = current_cards[i].front
-        initial_data[back_string] = current_cards[i].back
+        initial_data[front_string] = current_cards[i - 1].front
+        initial_data[back_string] = current_cards[i - 1].back
 
-    formset = CardFormSet(initial_data)
+    formset = card_form_set(initial_data)
+    title_form = SetForm(initial={'name': Set.objects.get(id=set_id).name})
     # formset.is_valid()
     return render(request, 'flash_card/edit.html', {
-        'all_sets': all_sets, 'cards': current_cards, 'set_id': current_set_id, 'formset': formset,
+        'all_sets': all_sets, 'cards': current_cards, 'set_id': current_set_id,
+        'title_form': title_form, 'formset': formset, 'empty_card_index': 0
     })
 
 
@@ -83,12 +107,10 @@ def save_set(request, set_id):
                 break
             if request.POST[form_front_string] != '' and request.POST[form_back_string] != '':
                 Card.objects.create(
+                    set_id=set_id,
                     front=request.POST[form_front_string],
                     back=request.POST[form_back_string],
-                    set_id=set_id
                 )
             i += 1
-        # print(set.card_set.all())
 
     return show_set(request, set_id)
-

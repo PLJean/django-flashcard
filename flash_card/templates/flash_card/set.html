@@ -1,23 +1,25 @@
 {%  extends 'flash_card/root_template.html' %}
 
 {% block body %}
+    <div id="set-title">
+        {{ title }}
+    </div>
     <div id="set-list">
         {% for card in cards %}
-            <div class="container-fluid">
-                <div class="row card">
+            <div class="row card container-fluid">
 {#                    <a class="counter">{{ forloop.counter }}</a>#}
-                    <div class="card-content">
-                        <div class="col-lg-1 counter">{{ forloop.counter }}</div>
-                        <div class="col-lg-5">{{ card.front }}</div>
-                        <div class="col-lg-5">{{ card.back }} </div>
-                        <div class="col-lg-1">x</div>
-                    </div>
+                <div class="card-content">
+                    <div class="col-lg-1 counter">{{ forloop.counter0 }}</div>
+                    <div class="col-lg-5">{{ card.front }}</div>
+                    <div class="col-lg-5">{{ card.back }} </div>
+                    <div class="col-lg-1"></div>
                 </div>
             </div>
         {% endfor %}
 {#        <form method="GET" action="{% url 'flash_card:edit' set_id %}">#}
 {#            <input id="edit" type="submit" value="Edit">#}
 {#        </form>#}
+    <script>window.onload=function() { setEmptyCard({{ empty_card_index}}); }</script>
     <a class="btn" href="{% url 'flash_card:edit' set_id %}">Edit</a>
     </div>
 {% endblock %}

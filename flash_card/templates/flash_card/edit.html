@@ -7,20 +7,23 @@
             <p><strong>{{ error_message }}</strong></p>
         {% endif %}
         <form action="{% url 'flash_card:save' set_id %}" method="post">
-              {% csrf_token %}
-{#            {{ formset.management_form }}#}
+            {% csrf_token %}
+            <div id="set-title">
+{#                {{ title_form.management_form }}#}
+                <a>Set title: </a>
+                {{ title_form }}
+            </div>
             <div id="set-formset">
-
                 {% with formset|length as formset_length %}
+                    {{ formset.management_form }}
                     {% for form in formset %}
-
-                        {% if forloop.counter == formset_length %}
-                        <div class="row card" id="empty_row">
-                        {% else %}
-                        <div class="row card">
-                        {% endif %}
+{#                        {% if forloop.counter0 == formset_length %}#}
+{#                        <div class="row card container-fluid" id="empty_card">#}
+{#                        {% else %}#}
+                        <div class="row card container-fluid">
+{#                        {% endif %}#}
                             <div class="card-content">
-                                <div class="col-lg-1 counter">{{ forloop.counter }}</div>
+                                <div class="col-lg-1 counter">{{ forloop.counter0 }}</div>
                                 <div class="col-lg-5">{{ form.front }}</div>
                                 <div class="col-lg-5">{{ form.back }} </div>
                                 <div class="col-lg-1" onclick="deleteCard(event)">x</div>
@@ -29,15 +32,17 @@
 {#                                {{ form.front }}#}
 {#                            </div>#}
 
+{#                        {% if forloop.counter0 == formset_length %}#}
+{#                        </div>#}
+{#                        {% else %}#}
+                        </div>
+{#                        {% endif %}#}
                         {% if forloop.counter == formset_length %}
-                        </div>
-                        {% else %}
-                        </div>
+                            <script>window.onload=function() { setCardCounter({{ formloop.counter0 }}); }</script>
                         {% endif %}
-
                     {% endfor %}
                {% endwith %}
-
+                <script>window.onload=function() { setEmptyCard({{ empty_card_index}}); }</script>
             </div>
         <a id="newCard-btn" class="btn" onclick="newCard()">!!</a>
         <input type="submit" value="Done"/>

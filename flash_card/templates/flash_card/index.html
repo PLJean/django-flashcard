@@ -1,6 +1,6 @@
 {%  extends 'flash_card/root_template.html' %}
 
 {% block body %}
-    Create a set
-     <p href="#menu-toggle" class="btn btn-default" id="menu-toggle">Create</p>
+    Create a set:
+     <a href="{% url 'flash_card:create' %}" class="btn btn-default" id="menu-toggle">Create</a>
 {% endblock %}

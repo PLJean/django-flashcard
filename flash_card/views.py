@@ -100,12 +100,14 @@ def edit_set(request, set_id):
 def save_set(request, set_id, create):
     if request.method == 'POST':
         if create:
+            print('Creating set.')
             flash_cards_data = Set.objects.create(
                 name=request.POST['name']
             )
             set_id = flash_cards_data.id
 
         else:
+            print('Dropping old set')
             flash_cards_data = Set.objects.get(id=set_id)
             flash_cards = flash_cards_data.card_set.all()
             flash_cards.delete()
@@ -117,7 +119,7 @@ def save_set(request, set_id, create):
             front='',
             back=''
         )
-        print(flash_cards.card_set.all())
+        print(flash_cards_data.card_set.all())
 
         i = 1
         while True:

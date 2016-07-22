@@ -13,11 +13,11 @@ function setCardCounter(num) {
 }
 
 function newCard() {
-    // Subtract one from card_count because of empty card template
-    var card_count = $('.row.card').length - 1;
-    console.log(card_count);
-    var new_card =  empty_card.clone();
 
+    // Subtract one from card_count because of empty card template
+    // console.log(card_count);
+    var new_card = empty_card.clone();
+    console.log(new_card);
     // remove empty_row attribute
     new_card.removeAttr('id');
 
@@ -25,8 +25,10 @@ function newCard() {
     new_card.attr('class', 'row card container-fluid new_row');
 
     var counter = new_card.find('.counter');
-    card_counter += 1;
-    counter.html(card_counter);
+    var card_count = $('.row.card').length - 1;
+    card_count += 1;
+    console.log(card_count);
+    counter.html(card_count);
     $('#set-formset').append(new_card[0].outerHTML);
 }
 

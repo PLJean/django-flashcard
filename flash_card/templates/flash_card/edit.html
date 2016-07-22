@@ -6,7 +6,7 @@
         {% if error_message %}
             <p><strong>{{ error_message }}</strong></p>
         {% endif %}
-        <form action="{% url 'flash_card:save' set_id %}" method="post">
+        <form action="{% url 'flash_card:save' set_id create %}" method="post">
             {% csrf_token %}
             <div id="set-title">
 {#                {{ title_form.management_form }}#}

@@ -81,11 +81,10 @@ def edit_set(request, set_id):
     }
 
     for i in range(1, initial_data['form-TOTAL_FORMS']):
-        print(i)
         front_string = 'form-' + str(i) + '-front'
         back_string = 'form-' + str(i) + '-back'
-        initial_data[front_string] = current_cards[i - 1].front
-        initial_data[back_string] = current_cards[i - 1].back
+        initial_data[front_string] = current_cards[i].front
+        initial_data[back_string] = current_cards[i].back
 
     formset = card_form_set(initial_data)
     title_form = SetForm(initial={'name': Set.objects.get(id=set_id).name})

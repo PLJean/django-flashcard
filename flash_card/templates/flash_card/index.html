@@ -1,6 +1,13 @@
 {%  extends 'flash_card/root_template.html' %}
 
 {% block body %}
-    Create a set:
-     <a href="{% url 'flash_card:create' %}" class="btn btn-default" id="menu-toggle">Create</a>
+<div class="set-list">
+    <ul>
+        {% for set in all_sets %}
+             <li>
+                <a href="/flash_card/{{ set.id }}">{{ set.name }}</a>
+             </li>
+        {% endfor %}
+    </ul>
+</div>
 {% endblock %}

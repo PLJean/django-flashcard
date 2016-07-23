@@ -23,6 +23,18 @@
     margin-top: 10px;
     padding-bottom: 10px;
     margin-bottom: 10px;
+    font-size: 16px;
+}
+
+#set-unordered-list {
+    list-style-type: none;
+}
+
+.set-item {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 16px;
+    color: black;
 }
 
 /*#set-list {*/

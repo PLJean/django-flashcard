@@ -1,6 +1,21 @@
 var empty_card = null;
 var card_counter = 0;
 
+$(document).on('click', '.delete-btn', function(e) {
+    var delCard = $(this).parent().parent();
+    var delCounter = delCard.find('.counter');
+    var allCards = $('.row.card');
+
+    // Loop through cards after deleted card, and renumber the html within the counter class div (old - 1)
+    for (var i = parseInt(delCounter.eq(0).html()) + 1; i < allCards.length; i++) {
+        var oldCounter = allCards.eq(i).find('.counter').eq(0);
+        var newNum = parseInt(oldCounter.html()) - 1;
+        oldCounter.html('' + newNum);
+    }
+
+    delCard.remove();
+});
+
 function setEmptyCard(index) {
     console.log('Setting up empty card.');
     empty_card = $('.row.card').eq(index);
@@ -30,7 +45,7 @@ function newCard() {
     card_count += 1;
     counter.html(card_count);
 
-    // Changing card front id and nameE
+    // Changing card front id and name
     var front = new_card.find('#id_form-0-front');
     front.attr('id',   'id_form-' + card_count + '-front');
     front.attr('name', 'form-' + card_count + '-front');
@@ -46,7 +61,23 @@ function newCard() {
     $('#set-formset').append(new_card[0].outerHTML);
 }
 
-function deleteCard(event) {
-    var target = event.target || event.srcElement;
-    target.parentElement.parentElement.remove();
-}
+// function deleteCard(event) {
+//     var deleteCard = $(this);
+//
+//     console.log(deleteCard.attr('class'));
+//     deleteCard.remove();
+//     var counter = deleteCard.find('.counter');
+//     // console.log(counter);
+//     var allCards = $('.row.card');
+//     // console.log(allCards.length);
+//     console.log(deleteCard);
+//     for (var i = counter + 1; i < allCards.length; i++) {
+//         console.log(i);
+//         var counter = allCards.find('.counter');
+//         console.log(counter);
+//         counter.html(i - 1);
+//     }
+//
+//     // $(this).parent().parent().remove();
+//     console.log('Fin.');
+// }

@@ -20,13 +20,13 @@
 {#                        {% if forloop.counter0 == formset_length %}#}
 {#                        <div class="row card container-fluid" id="empty_card">#}
 {#                        {% else %}#}
-                        <div class="row card container-fluid">
+                        <div id="card-{{ forloop.counter0 }}" class="row card container-fluid">
 {#                        {% endif %}#}
                             <div class="card-content">
                                 <div class="col-lg-1 counter">{{ forloop.counter0 }}</div>
                                 <div class="col-lg-5">{{ form.front }}</div>
                                 <div class="col-lg-5">{{ form.back }} </div>
-                                <div class="col-lg-1" onclick="deleteCard(event)">x</div>
+                                <div class="col-lg-1 delete-btn">x</div>
                             </div>
 {#                            <div class="container-fluid">#}
 {#                                {{ form.front }}#}

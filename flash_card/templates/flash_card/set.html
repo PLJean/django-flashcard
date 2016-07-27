@@ -6,7 +6,7 @@
     </div>
     <div id="set-list">
         {% for card in cards %}
-            <div class="row card container-fluid">
+            <div id="card-{{ forloop.counter0 }}" class="row card container-fluid">
 {#                    <a class="counter">{{ forloop.counter }}</a>#}
                 <div class="card-content">
                     <div class="col-lg-1 counter">{{ forloop.counter0 }}</div>

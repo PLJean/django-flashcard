@@ -2,3 +2,4 @@ secrets.py
 .idea*
 *.pyc
 *.sqlite3
+django-quiz-api/

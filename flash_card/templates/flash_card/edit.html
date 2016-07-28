@@ -1,45 +1,43 @@
 {%  extends 'flash_card/root_template.html' %}
 
 {% block body %}
-    <div id="set-edit">
-        {% if error_message %}
-            <p><strong>{{ error_message }}</strong></p>
-        {% endif %}
-        <form action="{% url 'flash_card:save' set_id create %}" method="post">
-            {% csrf_token %}
-            <div id="set-title">
-                <div>Set title: </div>
-                <div>{{ title_form }}</div>
-            </div>
-            <table id="set-formset" class="table">
-                    <thead id="card-cols">
-                        <th></th>
-                        <th>Terms</th>
-                        <th>Definitions</th>
-                        <th></th>
-                    </thead>
-                    <tbody>
-                        {% with formset|length as formset_length %}
-                            {{ formset.management_form }}
-                            {% for form in formset %}
-                                <tr id="card-{{ forloop.counter0 }}" class="card">
-                                    <td class="counter">{{ forloop.counter0 }}</td>
-                                    <td class="card-front">{{ form.front }}</td>
-                                    <td class="card-back">{{ form.back }}</td>
-                                    <td class="delete-btn">x</td>
-                                </tr>
-                                {% if forloop.counter == formset_length %}
-                                    <script>window.onload=function() { setCardCounter({{ formloop.counter0 }}); }</script>
-                                {% endif %}
-                            {% endfor %}
-                        {% endwith %}
-                    </tbody>
-                </table>
-                <script>window.onload=function() { setEmptyCard({{ empty_card_index}}); }</script>
+    {% if error_message %}
+        <p><strong>{{ error_message }}</strong></p>
+    {% endif %}
+    <form action="{% url 'flash_card:save' set_id create %}" method="post">
+        {% csrf_token %}
+        <div id="set-title">
+            <div>Set title: </div>
+            <div>{{ title_form }}</div>
+        </div>
+        <table id="set-formset" class="table">
+                <thead id="card-cols">
+                    <th></th>
+                    <th>Terms</th>
+                    <th>Definitions</th>
+                    <th></th>
+                </thead>
+                <tbody>
+                    {% with formset|length as formset_length %}
+                        {{ formset.management_form }}
+                        {% for form in formset %}
+                            <tr id="card-{{ forloop.counter0 }}" class="card">
+                                <td class="counter">{{ forloop.counter0 }}</td>
+                                <td class="card-front">{{ form.front }}</td>
+                                <td class="card-back">{{ form.back }}</td>
+                                <td class="delete-btn">x</td>
+                            </tr>
+                            {% if forloop.counter == formset_length %}
+                                <script>window.onload=function() { setCardCounter({{ formloop.counter0 }}); }</script>
+                            {% endif %}
+                        {% endfor %}
+                    {% endwith %}
+                </tbody>
             </table>
-        <a id="newCard-btn" class="btn" onclick="newCard()">!!</a>
-        <input type="submit" value="Done"/>
-        </form>
-    </div>
+            <script>window.onload=function() { setEmptyCard({{ empty_card_index}}); }</script>
+        </table>
+    <a id="newCard-btn" class="btn" onclick="newCard()">!!</a>
+    <input type="submit" value="Done"/>
+    </form>
 {% endblock %}
 

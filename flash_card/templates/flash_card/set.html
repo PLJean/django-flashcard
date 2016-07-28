@@ -2,20 +2,27 @@
 
 {% block body %}
     <div id="set-title">
-        {{ title }}
+        <div>Set title: </div>
+        <div>{{ title }}</div>
     </div>
-    <div id="set-list">
-        {% for card in cards %}
-            <div id="card-{{ forloop.counter0 }}" class="row card container-fluid">
-{#                    <a class="counter">{{ forloop.counter }}</a>#}
-                <div class="card-content">
-                    <div class="col-lg-1 counter">{{ forloop.counter0 }}</div>
-                    <div class="col-lg-5">{{ card.front }}</div>
-                    <div class="col-lg-5">{{ card.back }} </div>
-                    <div class="col-lg-1"></div>
-                </div>
-            </div>
-        {% endfor %}
+    <table id="set-list" class="table">
+        <thead id="card-cols">
+            <th></th>
+            <th>Terms</th>
+            <th>Definitions</th>
+            <th></th>
+        </thead>
+        <tbody>
+            {% for card in cards %}
+                <tr id="card-{{ forloop.counter0 }}" class="card">
+                    <td class="counter">{{ forloop.counter0 }}</td>
+                    <td class="card-front">{{ card.front }}</td>
+                    <td class="card-back">{{ card.back }}</td>
+                    <td></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 {#        <form method="GET" action="{% url 'flash_card:edit' set_id %}">#}
 {#            <input id="edit" type="submit" value="Edit">#}
 {#        </form>#}

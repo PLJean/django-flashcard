@@ -2,9 +2,10 @@ var empty_card = null;
 var card_counter = 0;
 
 $(document).on('click', '.delete-btn', function(e) {
-    var delCard = $(this).parent().parent();
+    var delCard = $(this).parent();
+    console.log(delCard);
     var delCounter = delCard.find('.counter');
-    var allCards = $('.row.card');
+    var allCards = $('.card');
 
     // Loop through cards after deleted card, and renumber the html within the counter class div (old - 1)
     for (var i = parseInt(delCounter.eq(0).html()) + 1; i < allCards.length; i++) {
@@ -18,7 +19,7 @@ $(document).on('click', '.delete-btn', function(e) {
 
 function setEmptyCard(index) {
     console.log('Setting up empty card.');
-    empty_card = $('.row.card').eq(index);
+    empty_card = $('.card').eq(index);
     empty_card.attr('id', 'empty_card');
     // console.log(empty_card);
 }
@@ -37,11 +38,11 @@ function newCard() {
     new_card.removeAttr('id');
 
     // add new_row attribute
-    new_card.attr('class', 'row card container-fluid new_row');
+    // new_card.attr('class', 'row card container-fluid new_row');
 
     // Changing card counter
     var counter = new_card.find('.counter');
-    var card_count = $('.row.card').length - 1;
+    var card_count = $('.card').length - 1;
     card_count += 1;
     counter.html(card_count);
 

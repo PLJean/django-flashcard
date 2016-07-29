@@ -144,14 +144,16 @@ def save_set(request, set_id, create):
 
 
 def flip(request, set_id):
-    flash_cards = shuffle(list(Set.objects.get(id=set_id).card_set.all()))
+    flash_cards = list(Set.objects.get(id=set_id).card_set.all())
+    shuffle(flash_cards)
     return render(request, 'flash_card/flip.html', {
         'cards': flash_cards, 'set_id': set_id,
     })
 
 
 def learn(request, set_id):
-    flash_cards = shuffle(Set.objects.get(id=set_id).card_set.all())
+    flash_cards = list(Set.objects.get(id=set_id).card_set.all())
+    shuffle(flash_cards)
     return render(request, 'flash_card/learn.html', {
         'cards': flash_cards, 'set_id': set_id,
     })

@@ -3,16 +3,30 @@
     margin-bottom: 5px;
 }
 
+#flip-btn {
+    width: 10%;
+    float: right;
+    margin-right: 5%;
+}
+
 #learn-btn {
-    width: 15%;
+    width: 10%;
+    float: right;
 }
 
-.counter {
-
+.set-data {
+    width: 50%;
+    padding-top: 2.5%;
+    margin: auto;
+    vertical-align: bottom;
 }
 
-#set-title {
+.set-data.set-title {
+    font-size: 22px;
+}
 
+.set-data.set-length {
+    color: #5e5e5e;
 }
 
 #id_name {
@@ -58,11 +72,3 @@
     font-size: 16px;
     color: black;
 }
-
-/*#set-list {*/
-    /*display: block;*/
-/*}*/
-
-/*#set-form {*/
-    /*display: none;*/
-/*}*/

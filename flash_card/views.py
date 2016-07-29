@@ -4,10 +4,12 @@ from .models import Set, Card
 from django.shortcuts import render
 from .forms import CardForm, SetForm
 from django.forms import formset_factory
+from random import shuffle
 import logging
 
 # import django
 # django.setup()
+
 
 all_sets = {}
 current_cards = {}
@@ -20,13 +22,13 @@ empty_card_index = 0
 
 def index(request):
     global all_sets
-    all_sets = get_all_sets(request)
+    all_sets = Set.objects.all()
+    set_lens = []
+    for set in all_sets:
+        # Subtract one from the length for the empty card.
+        set_lens.append(len(set.card_set.all()) - 1)
 
-    return render(request, 'flash_card/index.html', {'all_sets' : all_sets})
-
-
-def get_all_sets(request):
-    return Set.objects.all()
+    return render(request, 'flash_card/index.html', {'all_sets' : all_sets, 'set_lens': set_lens})
 
 
 def show_set(request, set_id):
@@ -139,3 +141,17 @@ def save_set(request, set_id, create):
             i += 1
 
     return show_set(request, set_id)
+
+
+def flip(request, set_id):
+    flash_cards = shuffle(list(Set.objects.get(id=set_id).card_set.all()))
+    return render(request, 'flash_card/flip.html', {
+        'cards': flash_cards, 'set_id': set_id,
+    })
+
+
+def learn(request, set_id):
+    flash_cards = shuffle(Set.objects.get(id=set_id).card_set.all())
+    return render(request, 'flash_card/learn.html', {
+        'cards': flash_cards, 'set_id': set_id,
+    })

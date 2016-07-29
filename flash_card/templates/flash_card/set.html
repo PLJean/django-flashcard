@@ -3,13 +3,16 @@
 {% block body %}
     <div id="set-title">
 {#        <div>Set title: </div>#}
-        <span href="{% url 'flash_card:learn' set_id %}" id="id_name">{{ title }}</span>
-        <input id="learn-btn" class="btn btn-default btn-md" style="float: right" value="Learn">
+        <span id="id_name">{{ title }}</span>
+        <input id="learn-btn" class="btn btn-default btn-md" value="Learn"
+               onclick="window.location.href='{% url 'flash_card:learn' set_id %}'" >
+        <input id="flip-btn" class="btn btn-default btn-md" value="Flip"
+               onclick="window.location.href='{% url 'flash_card:flip' set_id %}'" >
     </div>
     <table id="set-list" class="table">
         <thead id="card-cols">
             <th></th>
-            <th>Terms</th>
+             <th>Terms</th>
             <th>Definitions</th>
             <th></th>
         </thead>

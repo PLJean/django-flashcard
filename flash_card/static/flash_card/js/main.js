@@ -1,20 +1,26 @@
-var empty_card = null;
-var card_counter = 0;
+$(document).ready(function () {
+    var empty_card = null;
 
-$(document).on('click', '.delete-btn', function(e) {
-    var delCard = $(this).parent();
-    console.log(delCard);
-    var delCounter = delCard.find('.counter');
-    var allCards = $('.card');
+    $(document).on('click', '.delete-card-btn', function() {
+        var delCard = $(this).parent();
+        console.log(delCard);
+        var delCounter = delCard.find('.counter');
+        var allCards = $('.card');
 
-    // Loop through cards after deleted card, and renumber the html within the counter class div (old - 1)
-    for (var i = parseInt(delCounter.eq(0).html()) + 1; i < allCards.length; i++) {
-        var oldCounter = allCards.eq(i).find('.counter').eq(0);
-        var newNum = parseInt(oldCounter.html()) - 1;
-        oldCounter.html('' + newNum);
-    }
+        // Loop through cards after deleted card, and renumber the html within the counter class div (old - 1)
+        for (var i = parseInt(delCounter.eq(0).html()) + 1; i < allCards.length; i++) {
+            var oldCounter = allCards.eq(i).find('.counter').eq(0);
+            var newNum = parseInt(oldCounter.html()) - 1;
+            oldCounter.html('' + newNum);
+        }
 
-    delCard.remove();
+        delCard.remove();
+    });
+    
+    $(document).on('click', 'delete-set-btn', function() {
+        var delSet = $(this).parent();
+        console.log(delSet);
+    })
 });
 
 function setEmptyCard(index) {
@@ -22,10 +28,6 @@ function setEmptyCard(index) {
     empty_card = $('.card').eq(index);
     empty_card.attr('id', 'empty_card');
     // console.log(empty_card);
-}
-
-function setCardCounter(num) {
-    card_counter = num;
 }
 
 function newCard() {
@@ -62,6 +64,15 @@ function newCard() {
     $('#set-formset').append(new_card[0].outerHTML);
 }
 
+function playFlip(cards) {
+    for (var index = 0; index < cards.length; index++) {
+        
+    }
+}
+
+function playLearn(cards) {
+
+}
 // function deleteCard(event) {
 //     var deleteCard = $(this);
 //

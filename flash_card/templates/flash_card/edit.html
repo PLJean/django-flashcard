@@ -24,7 +24,7 @@
                                 <td class="counter">{{ forloop.counter0 }}</td>
                                 <td class="card-front">{{ form.front }}</td>
                                 <td class="card-back">{{ form.back }}</td>
-                                <td class="delete-btn">x</td>
+                                <td class="delete-card-btn">x</td>
                             </tr>
                             {% if forloop.counter == formset_length %}
                                 <script>window.onload=function() { setCardCounter({{ formloop.counter0 }}); }</script>

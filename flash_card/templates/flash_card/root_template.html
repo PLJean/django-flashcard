@@ -12,11 +12,22 @@
 
     <title>Flash Card</title>
 
- <link href={%  static "flash_card/css/main.css" %} rel="stylesheet">
+    <link href={%  static "flash_card/css/main.css" %} rel="stylesheet">
 
- <!-- Bootstrap CSS -->
- <link href={%  static "flash_card/css/bootstrap.min.css" %} rel="stylesheet">
+     <!-- Bootstrap CSS -->
+    <link href={%  static "flash_card/css/bootstrap.min.css" %} rel="stylesheet">
 
+    <!-- jQuery -->
+    <script src={% static "flash_card/js/jquery.min.js" %}></script>
+
+    <!-- Bootstrap JavaScript -->
+    <script src={% static "flash_card/js/bootstrap.min.js" %}></script>
+
+    <!-- Card Flipping jQuery plug-in -->
+    <script src={% static "flash_card/js/jquery.flip.min.js" %}></script>
+
+    <!-- Main -->
+    <script src={% static "flash_card/js/main.js" %}></script>
 </head>
 
 <body>
@@ -66,14 +77,6 @@
         </p>
     </div>
 </div>
-
-    <!-- jQuery -->
-    <script src={% static "flash_card/js/jquery.js" %}></script>
-
-    <!-- Bootstrap JavaScript -->
-    <script src={% static "flash_card/js/bootstrap.min.js" %}></script>
-
-    <script src={% static "flash_card/js/main.js" %}></script>
 
 </body>
 

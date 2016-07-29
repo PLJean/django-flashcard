@@ -12,25 +12,16 @@
 
     <title>Flash Card</title>
 
-    <!-- Bootstrap Core CSS -->
  <link href={%  static "flash_card/css/main.css" %} rel="stylesheet">
 
-    <link href={%  static "flash_card/css/bootstrap.min.css" %} rel="stylesheet">
-{#    <link href={%  static "flash_card/css/sidebar.css" %} rel="stylesheet">#}
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+ <!-- Bootstrap CSS -->
+ <link href={%  static "flash_card/css/bootstrap.min.css" %} rel="stylesheet">
 
 </head>
 
 <body>
 <nav class="navbar navbar-default">
   <div id="navbar-container" class="container">
-    <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
         <span class="sr-only">Toggle navigation</span>
@@ -43,7 +34,6 @@
         </a>
     </div>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
 {#        <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>#}
@@ -65,8 +55,8 @@
         <li><a href="{% url 'flash_card:index' %}" class="">Your Sets</a></li>
         <li><a href="{% url 'flash_card:create' %}" class="btn btn-default btn-md ">Create</a></li>
       </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
+    </div>
+  </div>
 </nav>
 <div class="container">
     <div class="col-lg-12">
@@ -75,14 +65,12 @@
             {% endblock %}
         </p>
     </div>
-    <!-- /#page-content-wrapper -->
 </div>
-    <!-- /#wrapper -->
 
     <!-- jQuery -->
     <script src={% static "flash_card/js/jquery.js" %}></script>
 
-    <!-- Bootstrap Core JavaScript -->
+    <!-- Bootstrap JavaScript -->
     <script src={% static "flash_card/js/bootstrap.min.js" %}></script>
 
     <script src={% static "flash_card/js/main.js" %}></script>

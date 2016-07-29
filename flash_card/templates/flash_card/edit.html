@@ -7,8 +7,7 @@
     <form action="{% url 'flash_card:save' set_id create %}" method="post">
         {% csrf_token %}
         <div id="set-title">
-            <div>Set title: </div>
-            <div>{{ title_form }}</div>
+            <span>{{ title_form }}</span>
         </div>
         <table id="set-formset" class="table">
                 <thead id="card-cols">
@@ -36,8 +35,8 @@
             </table>
             <script>window.onload=function() { setEmptyCard({{ empty_card_index}}); }</script>
         </table>
-    <a id="newCard-btn" class="btn" onclick="newCard()">!!</a>
-    <input type="submit" value="Done"/>
+    <a id="newCard-btn" class="btn btn-default btn-md" onclick="newCard()">Add Card</a>
+    <input class="btn btn-default btn-md" style="float: right" type="submit" value="Done"/>
     </form>
 {% endblock %}
 

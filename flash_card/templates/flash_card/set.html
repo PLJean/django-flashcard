@@ -2,8 +2,9 @@
 
 {% block body %}
     <div id="set-title">
-        <div>Set title: </div>
-        <div>{{ title }}</div>
+{#        <div>Set title: </div>#}
+        <span href="{% url 'flash_card:learn' set_id %}" id="id_name">{{ title }}</span>
+        <input id="learn-btn" class="btn btn-default btn-md" style="float: right" value="Learn">
     </div>
     <table id="set-list" class="table">
         <thead id="card-cols">

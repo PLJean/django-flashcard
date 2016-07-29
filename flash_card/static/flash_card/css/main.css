@@ -3,8 +3,21 @@
     margin-bottom: 5px;
 }
 
+#learn-btn {
+    width: 15%;
+}
+
 .counter {
 
+}
+
+#set-title {
+
+}
+
+#id_name {
+    width: 70%;
+    font-size: 28px;
 }
 
 .list-flashcard {

@@ -14,4 +14,7 @@ urlpatterns = [
     url(r'^flash_card/(?P<set_id>[0-9]+)/edit/?$',    views.edit_set, name='edit'),
     # /flash_card/112:save
     url(r'^flash_card/(?P<set_id>[0-9]+)/save/create=(?P<create>[0-9]+)/?$',  views.save_set, name='save'),
+    # /flash_card/112/learn
+    url(r'^flash_card/(?P<set_id>[0-9]+)/learn/?$', views.learn, name='learn'),
+
 ]

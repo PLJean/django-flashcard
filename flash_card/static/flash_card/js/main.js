@@ -1,6 +1,6 @@
 $(document).ready(function () {
     var empty_card = null;
-
+    var empty_card_index = 0;
     $(document).on('click', '.delete-card-btn', function() {
         var delCard = $(this).parent();
         console.log(delCard);
@@ -23,6 +23,8 @@ $(document).ready(function () {
     })
 });
 
+var current_cards = null;
+var current_index = 1;
 function setEmptyCard(index) {
     console.log('Setting up empty card.');
     empty_card = $('.card').eq(index);
@@ -64,32 +66,71 @@ function newCard() {
     $('#set-formset').append(new_card[0].outerHTML);
 }
 
-function playFlip(cards) {
-    for (var index = 0; index < cards.length; index++) {
-        
+function shuffleArray(array) {
+    for (var i = array.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
     }
+    return array;
 }
+
+function playFlip(cards) {
+    // Remove empty card from cards list
+    var empty_card = cards.splice(0, 1);
+    cards = shuffleArray(cards);
+    cards.unshift(empty_card);
+    console.log(cards);
+    current_cards = cards;
+    $('#front-content').html(current_cards[1]['fields']['front']);
+    $('#back-content').html(current_cards[1]['fields']['back']);
+    // for (var index = 1; index < cards.length; ) {
+    //     yield 2;
+    // }
+    // index = 0;
+    // while(true) {
+    //     yield index;
+    // }
+}
+
+function prevFlip() {
+    // Decrease index if in range
+    if (current_index > 1)
+        current_index -= 1;
+
+    // Reset if the index is out of range
+    if (current_index < 1)
+        current_index = 1;
+
+    else if (current_index > current_cards.length - 1)
+        current_index = current_cards.length - 1;
+
+    console.log(current_index);
+    $('#front-content').html(current_cards[current_index]['fields']['front']);
+    $('#back-content').html(current_cards[current_index]['fields']['back']);
+}
+
+function nextFlip() {
+    // Decrease index if in range
+    if (current_index < current_cards.length - 1)
+        current_index += 1;
+
+    // Reset if the index is out of range
+    if (current_index < 1)
+        current_index = 1;
+
+    else if (current_index > current_cards.length - 1)
+        current_index = current_cards.length - 1;
+
+    console.log(current_index);
+    $('#front-content').html(current_cards[current_index]['fields']['front']);
+    $('#back-content').html(current_cards[current_index]['fields']['back']);
+
+}
+
+
 
 function playLearn(cards) {
 
 }
-// function deleteCard(event) {
-//     var deleteCard = $(this);
-//
-//     console.log(deleteCard.attr('class'));
-//     deleteCard.remove();
-//     var counter = deleteCard.find('.counter');
-//     // console.log(counter);
-//     var allCards = $('.row.card');
-//     // console.log(allCards.length);
-//     console.log(deleteCard);
-//     for (var i = counter + 1; i < allCards.length; i++) {
-//         console.log(i);
-//         var counter = allCards.find('.counter');
-//         console.log(counter);
-//         counter.html(i - 1);
-//     }
-//
-//     // $(this).parent().parent().remove();
-//     console.log('Fin.');
-// }

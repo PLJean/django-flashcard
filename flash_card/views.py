@@ -4,7 +4,7 @@ from .models import Set, Card
 from django.shortcuts import render
 from .forms import CardForm, SetForm
 from django.forms import formset_factory
-from random import shuffle
+from django.core import serializers
 import logging
 
 # import django
@@ -144,16 +144,14 @@ def save_set(request, set_id, create):
 
 
 def flip(request, set_id):
-    flash_cards = list(Set.objects.get(id=set_id).card_set.all())
-    shuffle(flash_cards)
+    flash_cards = serializers.serialize("json", Set.objects.get(id=set_id).card_set.all())
     return render(request, 'flash_card/flip.html', {
         'cards': flash_cards, 'set_id': set_id,
     })
 
 
 def learn(request, set_id):
-    flash_cards = list(Set.objects.get(id=set_id).card_set.all())
-    shuffle(flash_cards)
+    flash_cards = serializers.serialize("json", Set.objects.get(id=set_id).card_set.all())
     return render(request, 'flash_card/learn.html', {
         'cards': flash_cards, 'set_id': set_id,
     })

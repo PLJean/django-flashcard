@@ -28,7 +28,7 @@ def index(request):
         # Subtract one from the length for the empty card.
         set_lens.append(len(set.card_set.all()) - 1)
 
-    return render(request, 'flash_card/index.html', {'all_sets' : all_sets, 'set_lens': set_lens})
+    return render(request, 'flashcard/index.html', {'all_sets' : all_sets, 'set_lens': set_lens})
 
 
 def show_set(request, set_id):
@@ -41,7 +41,7 @@ def show_set(request, set_id):
     # logger.info(msg='sup')
     current_set_id = set_id
 
-    return render(request, 'flash_card/set.html', {
+    return render(request, 'flashcard/set.html', {
         'set_id': set_id, 'all_sets': all_sets, 'cards': current_cards,
         'title': title, 'empty_card_index': 0
     })
@@ -63,7 +63,7 @@ def create_set(request):
     formset = card_form_set(initial_data)
     title_form = SetForm(initial={'name': ''})
 
-    return render(request, 'flash_card/edit.html', {
+    return render(request, 'flashcard/edit.html', {
         'all_sets': all_sets, 'cards': current_cards, 'set_id': set_id,
         'title_form': title_form, 'formset': formset, 'empty_card_index': empty_card_index,
         'create': 1
@@ -91,7 +91,7 @@ def edit_set(request, set_id):
     formset = card_form_set(initial_data)
     title_form = SetForm(initial={'name': Set.objects.get(id=set_id).name})
     # formset.is_valid()
-    return render(request, 'flash_card/edit.html', {
+    return render(request, 'flashcard/edit.html', {
         'all_sets': all_sets, 'cards': current_cards, 'set_id': current_set_id,
         'title_form': title_form, 'formset': formset, 'empty_card_index': empty_card_index,
         'create': 0
@@ -104,24 +104,24 @@ def save_set(request, set_id, create):
         # Check if create is 1 (create new set) or a 0 (edit an old set)
         if int(create):
             print('Creating set.')
-            flash_cards_data = Set.objects.create(
+            flashcards_data = Set.objects.create(
                 name=request.POST['name']
             )
-            set_id = flash_cards_data.id
+            set_id = flashcards_data.id
 
         else:
             print('Dropping old set')
-            flash_cards_data = Set.objects.get(id=set_id)
-            flash_cards = flash_cards_data.card_set.all()
-            flash_cards.delete()
+            flashcards_data = Set.objects.get(id=set_id)
+            flashcards = flashcards_data.card_set.all()
+            flashcards.delete()
 
-        flash_cards_data.name = request.POST['name']
+        flashcards_data.name = request.POST['name']
         Card.objects.create(
             set_id=set_id,
             front='',
             back=''
         )
-        print(flash_cards_data.card_set.all())
+        print(flashcards_data.card_set.all())
 
         i = 1
         while True:
@@ -144,14 +144,14 @@ def save_set(request, set_id, create):
 
 
 def flip(request, set_id):
-    flash_cards = serializers.serialize("json", Set.objects.get(id=set_id).card_set.all())
-    return render(request, 'flash_card/flip.html', {
-        'cards': flash_cards, 'set_id': set_id,
+    flashcards = serializers.serialize("json", Set.objects.get(id=set_id).card_set.all())
+    return render(request, 'flashcard/flip.html', {
+        'cards': flashcards, 'set_id': set_id,
     })
 
 
 def learn(request, set_id):
-    flash_cards = serializers.serialize("json", Set.objects.get(id=set_id).card_set.all())
-    return render(request, 'flash_card/learn.html', {
-        'cards': flash_cards, 'set_id': set_id,
+    flashcards = serializers.serialize("json", Set.objects.get(id=set_id).card_set.all())
+    return render(request, 'flashcard/learn.html', {
+        'cards': flashcards, 'set_id': set_id,
     })

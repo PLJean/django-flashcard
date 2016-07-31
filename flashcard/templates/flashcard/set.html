@@ -1,13 +1,13 @@
-{%  extends 'flash_card/root_template.html' %}
+{%  extends 'flashcard/root_template.html' %}
 
 {% block body %}
     <div id="set-title">
 {#        <div>Set title: </div>#}
         <span id="id_name">{{ title }}</span>
         <input id="learn-btn" class="btn btn-default btn-md" value="Learn"
-               onclick="window.location.href='{% url 'flash_card:learn' set_id %}'" >
+               onclick="window.location.href='{% url 'flashcard:learn' set_id %}'" >
         <input id="flip-btn" class="btn btn-default btn-md" value="Flip"
-               onclick="window.location.href='{% url 'flash_card:flip' set_id %}'" >
+               onclick="window.location.href='{% url 'flashcard:flip' set_id %}'" >
     </div>
     <table id="set-list" class="table">
         <thead id="card-cols">
@@ -27,11 +27,11 @@
             {% endfor %}
         </tbody>
     </table>
-{#        <form method="GET" action="{% url 'flash_card:edit' set_id %}">#}
+{#        <form method="GET" action="{% url 'flashcard:edit' set_id %}">#}
 {#            <input id="edit" type="submit" value="Edit">#}
 {#        </form>#}
     <script>window.onload=function() { setEmptyCard({{ empty_card_index}}); }</script>
-    <a class="btn" href="{% url 'flash_card:edit' set_id %}">Edit</a>
+    <a class="btn" href="{% url 'flashcard:edit' set_id %}">Edit</a>
     </div>
 {% endblock %}
 

@@ -79,19 +79,16 @@ function shuffleArray(array) {
 function playFlip(cards) {
     // Remove empty card from cards list
     var empty_card = cards.splice(0, 1);
+
+    // Shuffle array
     cards = shuffleArray(cards);
+
+    // Add empty card back to the original list
     cards.unshift(empty_card);
     console.log(cards);
     current_cards = cards;
     $('#front-content').html(current_cards[1]['fields']['front']);
     $('#back-content').html(current_cards[1]['fields']['back']);
-    // for (var index = 1; index < cards.length; ) {
-    //     yield 2;
-    // }
-    // index = 0;
-    // while(true) {
-    //     yield index;
-    // }
 }
 
 function prevFlip() {

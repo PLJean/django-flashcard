@@ -1,4 +1,4 @@
-{%  extends 'flash_card/root_template.html' %}
+{%  extends 'flashcard/root_template.html' %}
 {% load flashcard_extras %}
 
 {% block body %}
@@ -11,7 +11,7 @@
         <tbody>
             {% for set in all_sets %}
                  <tr class="set-item">
-                    <td class="set-data set-title"><a onclick="location.href='/flash_card/{{ set.id }}';">{{ set.name }}</a></td>
+                    <td class="set-data set-title"><a onclick="location.href='/flashcard/{{ set.id }}';">{{ set.name }}</a></td>
                     <td class="set-data set-length"><span> {{ set_lens|at:forloop.counter0 }} cards</span></td>
                     <td class="set-data delete-set-btn">x</td>
                  </tr>

@@ -12,22 +12,22 @@
 
     <title>Flash Card</title>
 
-    <link href={%  static "flash_card/css/main.css" %} rel="stylesheet">
+    <link href={%  static "flashcard/css/main.css" %} rel="stylesheet">
 
      <!-- Bootstrap CSS -->
-    <link href={%  static "flash_card/css/bootstrap.min.css" %} rel="stylesheet">
+    <link href={%  static "flashcard/css/bootstrap.min.css" %} rel="stylesheet">
 
     <!-- jQuery -->
-    <script src={% static "flash_card/js/jquery.min.js" %}></script>
+    <script src={% static "flashcard/js/jquery.min.js" %}></script>
 
     <!-- Bootstrap JavaScript -->
-    <script src={% static "flash_card/js/bootstrap.min.js" %}></script>
+    <script src={% static "flashcard/js/bootstrap.min.js" %}></script>
 
     <!-- Card Flipping jQuery plug-in -->
-    <script src={% static "flash_card/js/jquery.flip.min.js" %}></script>
+    <script src={% static "flashcard/js/jquery.flip.min.js" %}></script>
 
     <!-- Main -->
-    <script src={% static "flash_card/js/main.js" %}></script>
+    <script src={% static "flashcard/js/main.js" %}></script>
 </head>
 
 <body>
@@ -40,7 +40,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-        <a class="navbar-brand" href="/flash_card">
+        <a class="navbar-brand" href="/flashcard">
             Flash Card
         </a>
     </div>
@@ -65,8 +65,8 @@
 {#        </li>#}
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="{% url 'flash_card:index' %}" class="">Your Sets</a></li>
-        <li><a href="{% url 'flash_card:create' %}" class="btn btn-default btn-md ">Create</a></li>
+        <li><a href="{% url 'flashcard:index' %}" class="">Your Sets</a></li>
+        <li><a href="{% url 'flashcard:create' %}" class="btn btn-default btn-md ">Create</a></li>
       </ul>
     </div>
   </div>

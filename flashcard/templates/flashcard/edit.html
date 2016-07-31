@@ -1,10 +1,10 @@
-{%  extends 'flash_card/root_template.html' %}
+{%  extends 'flashcard/root_template.html' %}
 
 {% block body %}
     {% if error_message %}
         <p><strong>{{ error_message }}</strong></p>
     {% endif %}
-    <form action="{% url 'flash_card:save' set_id create %}" method="post">
+    <form action="{% url 'flashcard:save' set_id create %}" method="post">
         {% csrf_token %}
         <div id="set-title">
             <span>{{ title_form }}</span>

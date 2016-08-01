@@ -155,3 +155,10 @@ def learn(request, set_id):
     return render(request, 'flashcard/learn.html', {
         'cards': flashcards, 'set_id': set_id,
     })
+
+
+def export(request, set_id):
+    flashcards = Set.objects.get(id=set_id).card_set.all()
+    return render(request, 'flashcard/export.html', {
+        'cards': flashcards[1:], 'set_id': set_id
+    })

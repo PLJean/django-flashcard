@@ -18,4 +18,6 @@ urlpatterns = [
     url(r'^flashcard/(?P<set_id>[0-9]+)/learn/?$', views.learn, name='learn'),
     # /flashcard/112/flip
     url(r'^flashcard/(?P<set_id>[0-9]+)/flip/?$', views.flip, name='flip'),
+    # /flashcard/112/export
+    url(r'^flashcard/(?P<set_id>[0-9]+)/export/?$', views.export, name='export'),
 ]

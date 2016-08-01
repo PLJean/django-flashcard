@@ -11,38 +11,5 @@
     <textarea id="csv" rows="{{ cards|length }}" cols="100">{% spaceless %}
 {% for card in cards %}{{ card.front }}     {{ card.back }}
 {% endfor %}{% endspaceless %}</textarea>
-{#    <form method="post">#}
-{#        {% csrf_token %}#}
-{##}
-{#        <div id="set-title">#}
-{#            <span>{{ title_form }}</span>#}
-{#        </div>#}
-{#        <table id="set-formset" class="table">#}
-{#                <thead id="card-cols">#}
-{#                    <th></th>#}
-{#                    <th>Terms</th>#}
-{#                    <th>Definitions</th>#}
-{#                    <th></th>#}
-{#                </thead>#}
-{#                <tbody>#}
-{#                    {% with formset|length as formset_length %}#}
-{#                        {{ formset.management_form }}#}
-{#                        {% for form in formset %}#}
-{#                            <tr id="card-{{ forloop.counter0 }}" class="card">#}
-{#                                <td class="counter">{{ forloop.counter0 }}</td>#}
-{#                                <td class="card-front">{{ form.front }}</td>#}
-{#                                <td class="card-back">{{ form.back }}</td>#}
-{#                                <td class="delete-card-btn">x</td>#}
-{#                            </tr>#}
-{#                            {% if forloop.counter == formset_length %}#}
-{#                                <script>window.onload=function() { setCardCounter({{ formloop.counter0 }}); }</script>#}
-{#                            {% endif %}#}
-{#                        {% endfor %}#}
-{#                    {% endwith %}#}
-{#                </tbody>#}
-{#            </table>#}
-{#            <script>window.onload=function() { setEmptyCard({{ empty_card_index}}); }</script>#}
-{#        </table>#}
-{#    </form>#}
 {% endblock %}
 

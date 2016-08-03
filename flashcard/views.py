@@ -6,6 +6,7 @@ from .forms import CardForm, SetForm
 from django.forms import formset_factory
 from django.core import serializers
 from random import randrange
+from .constants import ADMIN_BAR
 import logging
 
 # import django
@@ -43,8 +44,7 @@ def show_set(request, set_id):
     current_set_id = set_id
 
     return render(request, 'flashcard/set.html', {
-        'set_id': set_id, 'all_sets': all_sets, 'cards': current_cards,
-        'title': title, 'empty_card_index': 0, 'color': set.color
+        'set_id': set_id, 'cards': current_cards, 'title': title, 'empty_card_index': 0, 'color': set.color
     })
 
 
@@ -74,9 +74,8 @@ def create_set(request):
     title_form = SetForm(initial={'name': '', 'color': color})
 
     return render(request, 'flashcard/edit.html', {
-        'all_sets': all_sets, 'cards': current_cards, 'set_id': set_id,
-        'title_form': title_form, 'formset': formset, 'empty_card_index': empty_card_index,
-        'create': 1, 'color': color
+        'cards': current_cards, 'set_id': set_id, 'title_form': title_form, 'formset': formset,
+        'empty_card_index': empty_card_index, 'create': 1, 'color': color
     })
 
 
@@ -104,9 +103,8 @@ def edit_set(request, set_id):
     title_form = SetForm(initial={'name': Set.objects.get(id=set_id).name, 'color': set.color})
     # formset.is_valid()
     return render(request, 'flashcard/edit.html', {
-        'set_id': current_set_id,
-        'title_form': title_form, 'formset': formset, 'empty_card_index': empty_card_index,
-        'create': 0, 'color': set.color
+        'set_id': current_set_id, 'title_form': title_form, 'formset': formset,
+        'empty_card_index': empty_card_index, 'create': 0, 'color': set.color
     })
 
 

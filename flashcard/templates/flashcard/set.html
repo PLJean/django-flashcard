@@ -25,13 +25,11 @@
                     <td></td>
                 </tr>
             {% endfor %}
+            <script>window.onload=function() { setEmptyCard({{ empty_card_index}}); }</script>
         </tbody>
     </table>
-{#        <form method="GET" action="{% url 'flashcard:edit' set_id %}">#}
-{#            <input id="edit" type="submit" value="Edit">#}
-{#        </form>#}
-    <script>window.onload=function() { setEmptyCard({{ empty_card_index}}); }</script>
-    <a class="btn" href="{% url 'flashcard:edit' set_id %}">Edit</a>
-    </div>
+    <input id="edit-btn" class="btn btn-default btn-md" value="Edit"
+           onclick="window.location.href='{% url 'flashcard:edit' set_id %}'">
+
 {% endblock %}
 

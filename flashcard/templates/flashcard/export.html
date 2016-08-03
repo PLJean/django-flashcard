@@ -4,6 +4,7 @@
     {% if error_message %}
         <p><strong>{{ error_message }}</strong></p>
     {% endif %}
+{#  Really dirty indentation below because textarea needed to be spaceless to give proper spacing  #}
     <textarea id="csv" rows="{{ cards|length }}" cols="100">{% spaceless %}
 {% for card in cards %}{{ card.front }}, {{ card.back }}
 {% endfor %}{% endspaceless %}</textarea>

@@ -2,21 +2,39 @@
 {% load staticfiles %}
 
 {% block body %}
-    <div class="col-lg-2">
-      <input id="flipPrev" class="btn btn-default btn-md" onclick="prevFlip()" value="Prev">
-    </div>
-    <div class="col-lg-offset-1 col-lg-6">
-        <div id="card">
-          <div class="front">
-              <span id="front-content"></span>
-          </div>
-          <div class="back">
-              <span id="back-content"></span>
-          </div>
+
+    <div class="container row" style="height: auto;">
+
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 card-container">
+            <div id="left-card">
+              <div class="front text-center" onclick="prevFlip()">
+                  prev
+              </div>
+            </div>
         </div>
-    </div>
-    <div class="col-lg-offset-1 col-lg-2">
-      <input id="flipNext" class="btn btn-default btn-md" onclick="nextFlip()" value="Next">
+
+        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 card-container">
+            <div id="card" style="position: relative;">
+              <div class="front text-center">
+                <span id="front-content"></span>
+              </div>
+              <div class="back text-center">
+                <span id="back-content"></span>
+              </div>
+                <div class="click-to-flip" style="position: absolute; top: 75%;">
+                    sup
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 card-container">
+            <div id="right-card">
+              <div class="front text-center" onclick="nextFlip()">
+                  next
+              </div>
+            </div>
+        </div>
+
     </div>
     <script>
         window.onload=function() { playFlip({{ cards|safe }}); }

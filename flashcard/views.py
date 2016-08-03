@@ -5,6 +5,7 @@ from django.shortcuts import render
 from .forms import CardForm, SetForm
 from django.forms import formset_factory
 from django.core import serializers
+from random import randrange
 import logging
 
 # import django
@@ -99,13 +100,17 @@ def edit_set(request, set_id):
 
 
 def save_set(request, set_id, create):
+    def random_color():
+        return '%x' % randrange(16777215)
+
     if request.method == 'POST':
         print("Create: ", type(create))
         # Check if create is 1 (create new set) or a 0 (edit an old set)
         if int(create):
             print('Creating set.')
             flashcards_data = Set.objects.create(
-                name=request.POST['name']
+                name=request.POST['name'],
+                color=random_color()
             )
             set_id = flashcards_data.id
 

@@ -2,20 +2,37 @@
 {% load flashcard_extras %}
 
 {% block body %}
-    <table id="sets-list">
-        <thead id="card-cols">
-            <th>Your Sets</th>
-            <th></th>
-            <th></th>
-        </thead>
-        <tbody>
-            {% for set in all_sets %}
-                 <tr class="set-item">
-                    <td class="set-data set-title"><a onclick="location.href='/flashcard/{{ set.id }}';">{{ set.name }}</a></td>
-                    <td class="set-data set-length"><span> {{ set_lens|at:forloop.counter0 }} cards</span></td>
-                    <td class="set-data delete-set-btn">x</td>
-                 </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+{#    <table id="sets-list">#}
+{#        <thead id="card-cols">#}
+{#            <th>Your Sets</th>#}
+{#            <th></th>#}
+{#            <th></th>#}
+{#        </thead>#}
+{#        <tbody>#}
+{#            {% for set in all_sets %}#}
+{#                 <tr class="set-item">#}
+{#                    <td class="set-data set-title"><a onclick="location.href='/flashcard/{{ set.id }}';">{{ set.name }}</a></td>#}
+{#                    <td class="set-data set-length"><span> {{ set_lens|at:forloop.counter0 }} cards</span></td>#}
+{#                    <td class="set-data delete-set-btn">x</td>#}
+{#                 </tr>#}
+{#            {% endfor %}#}
+{#        </tbody>#}
+{#    </table>#}
+{% for set in all_sets %}
+    <div class="col-sm-12 col-md-6 col-lg-3 card" onclick="location.href='/flashcard/{{ set.id }}';">
+          <div class="front text-center" style="background-color: #{{ set.color }}">
+              <a id="front-content">{{ set.name }}</a>
+          </div>
+{#          <div class="back">#}
+{#              <span id="back-content"></span>#}
+{#          </div>#}
+    </div>
+{% endfor %}
+{#        <script>#}
+{#        window.onload=function() { playFlip({{ cards|safe }}); }#}
+{##}
+{#        $(function($) {#}
+{#          $("#card").flip();#}
+{#        });#}
+{#    </script>#}
 {% endblock %}

@@ -124,10 +124,12 @@ def save_set(request, set_id, create):
         else:
             print('Dropping old set')
             flashcards_data = Set.objects.get(id=set_id)
+            flashcards_data.name = request.POST['name']
+            flashcards_data.color = request.POST['color'][1:]   # Removing the '#' from the beginning of the hex
+            flashcards_data.save()
             flashcards = flashcards_data.card_set.all()
             flashcards.delete()
 
-        flashcards_data.name = request.POST['name']
         Card.objects.create(
             set_id=set_id,
             front='',

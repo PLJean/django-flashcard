@@ -4,6 +4,9 @@
     <div id="set-title">
 {#        <div>Set title: </div>#}
         <span id="id_name">{{ title }}</span>
+        <svg width="28" height="28" style="vertical-align: bottom;">
+            <rect width="28" height="28" style="fill: #{{  color }}"/>
+        </svg>
         <input id="learn-btn" class="btn btn-default btn-md" value="Learn"
                onclick="window.location.href='{% url 'flashcard:learn' set_id %}'" >
         <input id="flip-btn" class="btn btn-default btn-md" value="Flip"

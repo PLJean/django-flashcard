@@ -44,11 +44,19 @@ def show_set(request, set_id):
 
     return render(request, 'flashcard/set.html', {
         'set_id': set_id, 'all_sets': all_sets, 'cards': current_cards,
-        'title': title, 'empty_card_index': 0
+        'title': title, 'empty_card_index': 0, 'color': set.color
     })
 
 
 def create_set(request):
+    def random_color():
+        color = '%x' % randrange(16777215)
+        c_len = len(color)
+        if c_len < 6:
+            color = '0' * (6- c_len) + color
+
+        return color
+
     card_form_set = formset_factory(CardForm)
 
     # set_id set to 0 so save_set() will know that the set is brand new
@@ -62,17 +70,20 @@ def create_set(request):
     }
 
     formset = card_form_set(initial_data)
-    title_form = SetForm(initial={'name': ''})
+    color = random_color()
+    title_form = SetForm(initial={'name': '', 'color': color})
 
     return render(request, 'flashcard/edit.html', {
         'all_sets': all_sets, 'cards': current_cards, 'set_id': set_id,
         'title_form': title_form, 'formset': formset, 'empty_card_index': empty_card_index,
-        'create': 1
+        'create': 1, 'color': color
     })
 
 
 def edit_set(request, set_id):
-    global all_sets, current_cards, current_set_id
+    global current_set_id
+    set = Set.objects.get(id=set_id)
+    current_cards = set.card_set.all()
     card_form_set = formset_factory(CardForm)
 
     initial_data = {
@@ -90,19 +101,16 @@ def edit_set(request, set_id):
         initial_data[back_string] = current_cards[i].back
 
     formset = card_form_set(initial_data)
-    title_form = SetForm(initial={'name': Set.objects.get(id=set_id).name})
+    title_form = SetForm(initial={'name': Set.objects.get(id=set_id).name, 'color': set.color})
     # formset.is_valid()
     return render(request, 'flashcard/edit.html', {
-        'all_sets': all_sets, 'cards': current_cards, 'set_id': current_set_id,
+        'set_id': current_set_id,
         'title_form': title_form, 'formset': formset, 'empty_card_index': empty_card_index,
-        'create': 0
+        'create': 0, 'color': set.color
     })
 
 
 def save_set(request, set_id, create):
-    def random_color():
-        return '%x' % randrange(16777215)
-
     if request.method == 'POST':
         print("Create: ", type(create))
         # Check if create is 1 (create new set) or a 0 (edit an old set)
@@ -110,7 +118,7 @@ def save_set(request, set_id, create):
             print('Creating set.')
             flashcards_data = Set.objects.create(
                 name=request.POST['name'],
-                color=random_color()
+                color=request.POST['color']
             )
             set_id = flashcards_data.id
 
@@ -167,3 +175,5 @@ def export(request, set_id):
     return render(request, 'flashcard/export.html', {
         'cards': flashcards[1:], 'set_id': set_id
     })
+
+

@@ -115,10 +115,9 @@ def save_set(request, set_id, create):
         print("Create: ", type(create))
         # Check if create is 1 (create new set) or a 0 (edit an old set)
         if int(create):
-            print('Creating set.')
             flashcards_data = Set.objects.create(
                 name=request.POST['name'],
-                color=request.POST['color']
+                color=request.POST['color'][1:]     # Removing the '#' from the beginning of the hex
             )
             set_id = flashcards_data.id
 
@@ -175,5 +174,4 @@ def export(request, set_id):
     return render(request, 'flashcard/export.html', {
         'cards': flashcards[1:], 'set_id': set_id
     })
-
 

@@ -1,6 +1,11 @@
 {%  extends 'flashcard/root_template.html' %}
 
 {% block body %}
+    <style>
+        #id_color {
+            background-color: #{{ color }};
+        }
+    </style>
     {% if error_message %}
         <p><strong>{{ error_message }}</strong></p>
     {% endif %}
@@ -8,11 +13,8 @@
         {% csrf_token %}
         <div id="set-title">
             <span>{{ title_form }}</span>
-            <svg width="36" height="36" style="vertical-align: bottom;">
-                <rect width="36" height="36" style="fill: #{{  color }}"/>
-            </svg>
             <script>
-
+                $('#id_color').val("#" + $('#id_color').val());
             </script>
         </a>
         </div>

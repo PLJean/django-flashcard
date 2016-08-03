@@ -12,7 +12,7 @@ class Category(models.Model):
 
 class Set(models.Model):
     name = models.CharField(max_length=128)
-    color = models.CharField(max_length=6)
+    color = models.CharField(max_length=7)
     # category = models.ManyToManyField(Category)
 
     def __str__(self):

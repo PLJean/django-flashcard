@@ -46,10 +46,42 @@
             <script>window.onload=function() { setEmptyCard({{ empty_card_index}}); }</script>
         </table>
 
-    <a id="addCard-btn" class="btn btn-default btn-md" onclick="newCard()">Add Card</a>
-    <a id="import-btn" class="btn btn-default btn-md" onclick="">Import</a>
+        <textarea id="set-import" rows="10" cols="100" style="display: none"></textarea>
 
-    <input class="btn btn-default btn-md" style="float: right" type="submit" value="Done"/>
+    <div class="row container">
+        <a id="addCard-btn" class="btn btn-default btn-md" onclick="newCard()">Add Card</a>
+        <a id="import-btn" class="btn btn-default btn-md" onclick="showImport()">Import</a>
+        <a id="import-save-btn" class="btn btn-default btn-md" style="display: none" onclick="saveImport()">Save</a>
+
+        <input id="done-btn" class="btn btn-default btn-md" style="float: right" type="submit" value="Done"/>
+    </div>
+
     </form>
+    <script>
+        function showImport() {
+            $('#set-formset').hide();
+            $('#addCard-btn').hide();
+            $('#import-btn').hide();
+            $('#done-btn').hide();
+            $('#import-save-btn').show();
+            $('#set-import').show();
+
+        }
+
+        function showFormset() {
+            $('#import-save-btn').hide();
+            $('#set-import').hide();
+            $('#set-formset').show();
+            $('#addCard-btn').show();
+            $('#import-btn').show();
+            $('#done-btn').show();
+
+        }
+
+        function saveImport() {
+            showFormset();
+
+        }
+    </script>
 {% endblock %}
 

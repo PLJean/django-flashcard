@@ -2,7 +2,6 @@
 
 {% block body %}
     <div id="set-title">
-{#        <div>Set title: </div>#}
         <span id="id_name">{{ title }}</span>
         <svg width="28" height="28" style="vertical-align: bottom;">
             <rect width="28" height="28" style="fill: #{{  color }}"/>
@@ -33,6 +32,8 @@
     </table>
     <input id="edit-btn" class="btn btn-default btn-md" value="Edit"
            onclick="window.location.href='{% url 'flashcard:edit' set_id %}'">
+    <input id=export-btn" class="btn btn-default btn-md" value="Export"
+           onclick="window.location.href='{% url 'flashcard:export' set_id %}'">
 
 {% endblock %}
 

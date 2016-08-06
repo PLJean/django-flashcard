@@ -54,15 +54,15 @@ function newCard() {
     var front = new_card.find('#id_form-0-front');
     front.attr('id',   'id_form-' + card_count + '-front');
     front.attr('name', 'form-' + card_count + '-front');
-    console.log(front.attr('id'));
-    console.log(front.attr('name'));
+    // console.log(front.attr('id'));
+    // console.log(front.attr('name'));
 
     // Changing card back id and name
     var back = new_card.find('#id_form-0-back');
     back.attr('id',   'id_form-' + card_count + '-back');
     back.attr('name', 'form-' + card_count + '-back');
-    console.log(back.attr('id'));
-    console.log(back.attr('name'));
+    // console.log(back.attr('id'));
+    // console.log(back.attr('name'));
     $('#set-formset').append(new_card[0].outerHTML);
 }
 
@@ -89,6 +89,7 @@ function playFlip(cards) {
     current_cards = cards;
     $('#front-content').html(current_cards[1]['fields']['front']);
     $('#back-content').html(current_cards[1]['fields']['back']);
+    $('#card-index').html(current_index + " of " + (current_cards.length - 1));
 }
 
 function prevFlip() {
@@ -106,6 +107,7 @@ function prevFlip() {
     console.log(current_index);
     $('#front-content').html(current_cards[current_index]['fields']['front']);
     $('#back-content').html(current_cards[current_index]['fields']['back']);
+    $('#card-index').html(current_index + " of " + (current_cards.length - 1));
 }
 
 function nextFlip() {
@@ -123,7 +125,7 @@ function nextFlip() {
     console.log(current_index);
     $('#front-content').html(current_cards[current_index]['fields']['front']);
     $('#back-content').html(current_cards[current_index]['fields']['back']);
-
+    $('#card-index').html(current_index + " of " + (current_cards.length - 1));
 }
 
 

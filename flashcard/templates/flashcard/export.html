@@ -7,23 +7,20 @@
      <div id="set-title">
         <span id="id_name">Export {{ title }}</span>
     </div>
-    <div>
-
-    </div>
 
     <div class="row container">
-        <form action="" onchange="updateExport()">
-            <div><input id="csv-btn" type="radio" name="file-type" value="CSV" checked="checked"> CSV</div>
-            <div><input id="tsv-btn" type="radio" name="file-type" value="TSV"> TSV</div>
+        <form action="">
+{#            <div><input id="csv-btn" type="radio" name="file-type" value="CSV" checked="checked"> CSV</div>#}
+{#            <div><input id="tsv-btn" type="radio" name="file-type" value="TSV"> TSV</div>#}
         </form>
  {#  Really dirty indentation below because textarea needed to be spaceless to give proper spacing  #}
     <textarea id="csv" rows="{{ cards|length }}" cols="100">{% spaceless %}
 {% for card in cards %}{{ card.front }}, {{ card.back }}
 {% endfor %}{% endspaceless %}</textarea>
-
-    <textarea id="tsv" rows="{{ cards|length }}" cols="100" style="display: none;">{% spaceless %}
-{% for card in cards %}{{ card.front }}     {{ card.back }}
-{% endfor %}{% endspaceless %}</textarea>
+{##}
+{#    <textarea id="tsv" rows="{{ cards|length }}" cols="100" style="display: none;">{% spaceless %}#}
+{#{% for card in cards %}{{ card.front }}     {{ card.back }}#}
+{#{% endfor %}{% endspaceless %}</textarea>#}
 {#  End of really dirty indentation  #}
         <div>
             <input id="back-btn" class="btn btn-default btn-md" value="Back"

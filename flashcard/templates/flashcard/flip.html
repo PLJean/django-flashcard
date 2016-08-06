@@ -2,45 +2,63 @@
 {% load staticfiles %}
 
 {% block body %}
+    <style>
+        .front {
+            position: static;
+        }
+    </style>
 
-    <div class="container row" style="height: auto;">
-
-        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 card-container">
-            <div id="left-card">
-              <div class="front text-center" onclick="prevFlip()">
-                  prev
-              </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-offset-2 col-sm-offset-2 col-md-offset-2 col-lg-offset-2
+                        col-xs-8 col-sm-8 col-md-8 col-lg-8 card-container">
+                <div id="card">
+                  <div class="card-side front text-center">
+                    <span id="front-content"></span>
+                  </div>
+                  <div class="card-side back text-center">
+                    <span id="back-content"></span>
+                  </div>
+                </div>
             </div>
         </div>
-
-        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 card-container">
-            <div id="card" style="position: relative;">
-              <div class="front text-center">
-                <span id="front-content"></span>
-              </div>
-              <div class="back text-center">
-                <span id="back-content"></span>
-              </div>
-            </div>
-        </div>
-
-        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 card-container">
-            <div id="right-card">
-              <div class="front text-center" onclick="nextFlip()">
-                  next
-              </div>
-            </div>
-        </div>
-
     </div>
-    <div class="container row">
-        Click to flip
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-offset-3 col-sm-offset-3 col-md-offset-3 col-lg-offset-3
+                        col-xs-2 col-sm-2 col-md-2 col-lg-2 card-container">
+                <div id="left-card">
+                  <div class="turn-btn text-center" onclick="prevFlip()">
+                      prev
+                  </div>
+                </div>
+            </div>
+            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 card-container">
+                <div id="card-index" class="text-center">
+                </div>
+            </div>
+            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 card-container">
+                <div id="right-card">
+                  <div class="turn-btn text-center" onclick="nextFlip()">
+                      next
+                  </div>
+                </div>
+            </div>
+        </div>
     </div>
+
     <script>
         window.onload=function() { playFlip({{ cards|safe }}); }
 
         $(function($) {
           $("#card").flip();
         });
+
+        $(document).ready(function() {
+            $(".card-side.front").css('position', 'absolute');
+            $(".card-side.back").css('position', 'static');
+        });
+
     </script>
 {% endblock %}

@@ -81,6 +81,33 @@
         function saveImport() {
             showFormset();
 
+            var rows = $('#set-import').val().split('\n');
+            console.log("rows: " + rows.length);
+            var cards = $('.card');
+            var card_length = cards.length;
+            console.log("card-length: " + card_length);
+
+            // If cards need to be created
+            if (card_length - 1 < rows.length) {
+                for (var i = 0; i <= rows.length - card_length; i++) {
+                    newCard();
+                }
+            } else {
+                for (var i = card_length - 1; i >= rows.length;i--) {
+                    cards[i].remove();
+                }
+
+            }
+
+            console.log("adding data to cards");
+            for(var i = 1; i <= rows.length; i++) {
+                console.log(i);
+                var front = rows[i - 1].split(',')[0].trim();
+                var back = rows[i - 1].split(',')[1].trim();
+                $('#id_form-' + i + '-front').eq(0).val(front);
+                $('#id_form-' + i + '-back').eq(0).val(back);
+            }
+
         }
     </script>
 {% endblock %}

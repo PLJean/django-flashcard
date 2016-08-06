@@ -18,7 +18,16 @@
     border-width: 1px;
 }
 
-.click-to-flip {
+.turn-btn.text-center {
+    padding: 25%;
+    border-style: solid;
+    border-radius: 15px;
+    border-width: 1px;
+}
+
+#card-index {
+    padding-top: 25%;
+    /*vertical-align: middle;*/
 }
 
 .btn.btn-nav {
@@ -30,10 +39,9 @@
     border-color: #e7e7e7;
 }
 
-.btn.btn-nav:first-of-type{
-    border-left-style: solid;
+.row {
+    height: 100%;
 }
-
 .navbar.navbar-default{
 }
 
@@ -66,22 +74,6 @@
     font-size: 28px;
 }
 
-.list-flashcard {
-    background: black;
-    color: white;
-}
-
-.list-flashcard:nth-child(odd) {
-    background: white;
-    color: black;
-}
-
-#top-nav {
-    margin-bottom: 0px;
-    background-color: white;
-    border-radius: 0px;
-}
-
 #empty_card {
     display: none;
 }
@@ -94,10 +86,6 @@
     font-size: 16px;
 }
 
-#set-unordered-list {
-    list-style-type: none;
-}
-
 .set-item {
     padding-top: 5px;
     padding-bottom: 5px;
@@ -108,4 +96,5 @@
 .btn {
     width: 10%;
 }
+
 

@@ -2,8 +2,7 @@
 
 This is a configurable flashcard application for Django with very easy installation.
 
-Here's an example website for [Spanish flashcards](http://thespanishcards.com) that I've been using to study for my Spanish exams. Here's the a
-blank version of the [web app](http://patrickjean.me/flashcard). This is what you'll get when you first install the app.
+Here's the a blank version of the [web app](http://patrickjean.me/flashcard). This is what you'll get when you first install the app.
 
 ## Django-Flashcard Features
 

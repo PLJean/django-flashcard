@@ -29,15 +29,27 @@ INSTALLED_APPS = (
     ....,
 )
 ```
+4) Include the function `include` in urls.py from django.conf.urls
 
-4) Add the following to your projects url.py file, substituting q for whatever you want the base url to be.
+```
+from django.conf.urls import url, include
+```
+
+5) Add the following to your projects url.py file, substituting q for whatever you want the base url to be.
 
 ```
 urlpatterns = patterns('',
     ...
-    url(r'^q/', include('flashcard.urls')),
+    url(r'^', include('flashcard.urls')),
     ...
 )
+```
+
+6) Make all migrations
+
+```
+python manage.py makemigrations
+python manage.py migrate
 ```
 
 ## Credits

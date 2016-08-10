@@ -1,114 +1,117 @@
 {%  extends 'flashcard/root_template.html' %}
 
 {% block body %}
-    <style>
-        #id_color {
-            background-color: #{{ color }};
-        }
-    </style>
-    {% if error_message %}
-        <p><strong>{{ error_message }}</strong></p>
-    {% endif %}
-    <form action="{% url 'flashcard:save' set_id create %}" method="post">
-        {% csrf_token %}
-        <div id="set-title">
-            <span>{{ title_form }}</span>
-            <script>
-                $('#id_color').val("#" + $('#id_color').val());
-            </script>
-        </a>
+    <div class="container">
+        <style>
+            #id_color {
+                background-color: #{{ color }};
+            }
+        </style>
+        {% if error_message %}
+            <p><strong>{{ error_message }}</strong></p>
+        {% endif %}
+        <form action="{% url 'flashcard:save' set_id create %}" method="post">
+            {% csrf_token %}
+            <div id="set-title">
+                <span>{{ title_form }}</span>
+                <script>
+                    $('#id_color').val("#" + $('#id_color').val());
+                </script>
+            </a>
+            </div>
+
+            <table id="set-formset" class="table">
+                    <thead id="card-cols">
+                        <th></th>
+                        <th>Terms</th>
+                        <th>Definitions</th>
+                        <th></th>
+                    </thead>
+                    <tbody>
+                        {% with formset|length as formset_length %}
+                            {{ formset.management_form }}
+                            {% for form in formset %}
+                                <tr id="card-{{ forloop.counter0 }}" class="card">
+                                    <td class="counter">{{ forloop.counter0 }}</td>
+                                    <td class="card-front">{{ form.front }}</td>
+                                    <td class="card-back">{{ form.back }}</td>
+                                    <td class="delete-card-btn">x</td>
+                                </tr>
+                                {% if forloop.counter == formset_length %}
+                                    <script>window.onload=function() { setCardCounter({{ formloop.counter0 }}); }</script>
+                                {% endif %}
+                            {% endfor %}
+                        {% endwith %}
+                    </tbody>
+                </table>
+                <script>window.onload=function() { setEmptyCard({{ empty_card_index}}); }</script>
+            </table>
+
+            <textarea id="set-import" rows="10" cols="100" style="display: none"></textarea>
+
+        <div class="row container">
+            <a id="addCard-btn" class="btn btn-default btn-md" onclick="newCard()">Add Card</a>
+            <a id="import-btn" class="btn btn-default btn-md" onclick="showImport()">Import</a>
+            <a id="import-save-btn" class="btn btn-default btn-md" style="display: none" onclick="saveImport()">Save</a>
+
+            <input id="done-btn" class="btn btn-default btn-md" style="float: right" type="submit" value="Done"/>
         </div>
 
-        <table id="set-formset" class="table">
-                <thead id="card-cols">
-                    <th></th>
-                    <th>Terms</th>
-                    <th>Definitions</th>
-                    <th></th>
-                </thead>
-                <tbody>
-                    {% with formset|length as formset_length %}
-                        {{ formset.management_form }}
-                        {% for form in formset %}
-                            <tr id="card-{{ forloop.counter0 }}" class="card">
-                                <td class="counter">{{ forloop.counter0 }}</td>
-                                <td class="card-front">{{ form.front }}</td>
-                                <td class="card-back">{{ form.back }}</td>
-                                <td class="delete-card-btn">x</td>
-                            </tr>
-                            {% if forloop.counter == formset_length %}
-                                <script>window.onload=function() { setCardCounter({{ formloop.counter0 }}); }</script>
-                            {% endif %}
-                        {% endfor %}
-                    {% endwith %}
-                </tbody>
-            </table>
-            <script>window.onload=function() { setEmptyCard({{ empty_card_index}}); }</script>
-        </table>
+        </form>
+        <script>
+            function showImport() {
+                $('#set-formset').hide();
+                $('#addCard-btn').hide();
+                $('#import-btn').hide();
+                $('#done-btn').hide();
+                $('#import-save-btn').show();
+                $('#set-import').show();
 
-        <textarea id="set-import" rows="10" cols="100" style="display: none"></textarea>
+            }
 
-    <div class="row container">
-        <a id="addCard-btn" class="btn btn-default btn-md" onclick="newCard()">Add Card</a>
-        <a id="import-btn" class="btn btn-default btn-md" onclick="showImport()">Import</a>
-        <a id="import-save-btn" class="btn btn-default btn-md" style="display: none" onclick="saveImport()">Save</a>
+            function showFormset() {
+                $('#import-save-btn').hide();
+                $('#set-import').hide();
+                $('#set-formset').show();
+                $('#addCard-btn').show();
+                $('#import-btn').show();
+                $('#done-btn').show();
 
-        <input id="done-btn" class="btn btn-default btn-md" style="float: right" type="submit" value="Done"/>
+            }
+
+            function saveImport() {
+                showFormset();
+
+                var rows = $('#set-import').val().split('\n');
+                console.log("rows: " + rows.length);
+                var cards = $('.card');
+                var card_length = cards.length;
+                console.log("card-length: " + card_length);
+
+                // If cards need to be created
+                if (card_length - 1 < rows.length) {
+                    for (var i = 0; i <= rows.length - card_length; i++) {
+                        newCard();
+                    }
+                } else {
+                    for (var i = card_length - 1; i > rows.length;i--) {
+                        cards[i].remove();
+                    }
+
+                }
+
+                console.log("adding data to cards");
+                for(var i = 1; i <= rows.length; i++) {
+                    console.log(i);
+                    var front = rows[i - 1].split(',')[0].trim();
+                    var back = rows[i - 1].split(',')[1].trim();
+                    $('#id_form-' + i + '-front').eq(0).val(front);
+                    $('#id_form-' + i + '-back').eq(0).val(back);
+                }
+
+            }
+        </script>
     </div>
 
-    </form>
-    <script>
-        function showImport() {
-            $('#set-formset').hide();
-            $('#addCard-btn').hide();
-            $('#import-btn').hide();
-            $('#done-btn').hide();
-            $('#import-save-btn').show();
-            $('#set-import').show();
-
-        }
-
-        function showFormset() {
-            $('#import-save-btn').hide();
-            $('#set-import').hide();
-            $('#set-formset').show();
-            $('#addCard-btn').show();
-            $('#import-btn').show();
-            $('#done-btn').show();
-
-        }
-
-        function saveImport() {
-            showFormset();
-
-            var rows = $('#set-import').val().split('\n');
-            console.log("rows: " + rows.length);
-            var cards = $('.card');
-            var card_length = cards.length;
-            console.log("card-length: " + card_length);
-
-            // If cards need to be created
-            if (card_length - 1 < rows.length) {
-                for (var i = 0; i <= rows.length - card_length; i++) {
-                    newCard();
-                }
-            } else {
-                for (var i = card_length - 1; i >= rows.length;i--) {
-                    cards[i].remove();
-                }
-
-            }
-
-            console.log("adding data to cards");
-            for(var i = 1; i <= rows.length; i++) {
-                console.log(i);
-                var front = rows[i - 1].split(',')[0].trim();
-                var back = rows[i - 1].split(',')[1].trim();
-                $('#id_form-' + i + '-front').eq(0).val(front);
-                $('#id_form-' + i + '-back').eq(0).val(back);
-            }
-
-        }
-    </script>
 {% endblock %}
 

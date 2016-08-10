@@ -1,39 +1,42 @@
 {%  extends 'flashcard/root_template.html' %}
 
 {% block body %}
-    <div id="set-title">
-        <span id="id_name">{{ title }}</span>
-        <svg width="28" height="28" style="vertical-align: bottom;">
-            <rect width="28" height="28" style="fill: #{{  color }}"/>
-        </svg>
-        <input id="learn-btn" class="btn btn-default btn-md" value="Learn"
-               onclick="window.location.href='{% url 'flashcard:learn' set_id %}'" >
-        <input id="flip-btn" class="btn btn-default btn-md" value="Flip"
-               onclick="window.location.href='{% url 'flashcard:flip' set_id %}'" >
+    <div class="container">
+          <div id="set-title">
+            <span id="id_name">{{ title }}</span>
+            <svg width="28" height="28" style="vertical-align: bottom;">
+                <rect width="28" height="28" style="fill: #{{  color }}"/>
+            </svg>
+            <input id="learn-btn" class="btn btn-default btn-md" value="Learn"
+                   onclick="window.location.href='{% url 'flashcard:learn' set_id %}'" >
+            <input id="flip-btn" class="btn btn-default btn-md" value="Flip"
+                   onclick="window.location.href='{% url 'flashcard:flip' set_id %}'" >
+        </div>
+        <table id="set-list" class="table">
+            <thead id="card-cols">
+                <th></th>
+                 <th>Terms</th>
+                <th>Definitions</th>
+                <th></th>
+            </thead>
+            <tbody>
+                {% for card in cards %}
+                    <tr id="card-{{ forloop.counter0 }}" class="card">
+                        <td class="counter">{{ forloop.counter0 }}</td>
+                        <td class="card-front">{{ card.front }}</td>
+                        <td class="card-back">{{ card.back }}</td>
+                        <td></td>
+                    </tr>
+                {% endfor %}
+                <script>window.onload=function() { setEmptyCard({{ empty_card_index}}); }</script>
+            </tbody>
+        </table>
+        <input id="edit-btn" class="btn btn-default btn-md" value="Edit"
+               onclick="window.location.href='{% url 'flashcard:edit' set_id %}'">
+        <input id=export-btn" class="btn btn-default btn-md" value="Export"
+               onclick="window.location.href='{% url 'flashcard:export' set_id %}'">
     </div>
-    <table id="set-list" class="table">
-        <thead id="card-cols">
-            <th></th>
-             <th>Terms</th>
-            <th>Definitions</th>
-            <th></th>
-        </thead>
-        <tbody>
-            {% for card in cards %}
-                <tr id="card-{{ forloop.counter0 }}" class="card">
-                    <td class="counter">{{ forloop.counter0 }}</td>
-                    <td class="card-front">{{ card.front }}</td>
-                    <td class="card-back">{{ card.back }}</td>
-                    <td></td>
-                </tr>
-            {% endfor %}
-            <script>window.onload=function() { setEmptyCard({{ empty_card_index}}); }</script>
-        </tbody>
-    </table>
-    <input id="edit-btn" class="btn btn-default btn-md" value="Edit"
-           onclick="window.location.href='{% url 'flashcard:edit' set_id %}'">
-    <input id=export-btn" class="btn btn-default btn-md" value="Export"
-           onclick="window.location.href='{% url 'flashcard:export' set_id %}'">
+
 
 {% endblock %}
 

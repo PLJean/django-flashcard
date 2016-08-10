@@ -9,6 +9,7 @@
     border-style: solid;
     border-radius: 15px;
     border-width: 1px;
+    font-size: 28px;
 }
 
 .back {
@@ -23,6 +24,10 @@
     border-style: solid;
     border-radius: 15px;
     border-width: 1px;
+}
+
+.card-side {
+    font-size: 28px;
 }
 
 #card-index {
@@ -41,8 +46,6 @@
 
 .row {
     height: 100%;
-}
-.navbar.navbar-default{
 }
 
 #flip-btn {

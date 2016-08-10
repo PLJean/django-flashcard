@@ -6,10 +6,15 @@
         .front {
             position: static;
         }
+
+    .navigation.row {
+        margin-top: 1%;
+    }
+
     </style>
 
     <div class="container-fluid">
-        <div class="row">
+        <div class="card row">
             <div class="col-xs-offset-2 col-sm-offset-2 col-md-offset-2 col-lg-offset-2
                         col-xs-8 col-sm-8 col-md-8 col-lg-8 card-container">
                 <div id="card">
@@ -25,7 +30,7 @@
     </div>
 
     <div class="container-fluid">
-        <div class="row">
+        <div class="navigation row">
             <div class="col-xs-offset-3 col-sm-offset-3 col-md-offset-3 col-lg-offset-3
                         col-xs-2 col-sm-2 col-md-2 col-lg-2 card-container">
                 <div id="left-card">
@@ -49,7 +54,7 @@
     </div>
 
     <script>
-        window.onload=function() { playFlip({{ cards|safe }}); }
+        window.onload=function() { playFlip({{ cards|safe }}); };
 
         $(function($) {
           $("#card").flip();

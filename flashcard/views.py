@@ -163,9 +163,10 @@ def flip(request, set_id):
 
 
 def learn(request, set_id):
-    flashcards = serializers.serialize("json", Set.objects.get(id=set_id).card_set.all())
+    flashcards_data = Set.objects.get(id=set_id)
+    flashcards = serializers.serialize("json", flashcards_data.card_set.all())
     return render(request, 'flashcard/learn.html', {
-        'cards': flashcards, 'set_id': set_id,
+        'title': flashcards_data.name, 'cards': flashcards, 'set_id': set_id,
     })
 
 

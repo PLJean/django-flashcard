@@ -1,44 +1,49 @@
 {%  extends 'flashcard/root_template.html' %}
 
 {% block body %}
+
     {% if error_message %}
         <p><strong>{{ error_message }}</strong></p>
     {% endif %}
-     <div id="set-title">
+    <div class="container">
+        <div id="set-title">
         <span id="id_name">Export {{ title }}</span>
     </div>
 
-    <div class="row container">
-        <form action="">
-{#            <div><input id="csv-btn" type="radio" name="file-type" value="CSV" checked="checked"> CSV</div>#}
-{#            <div><input id="tsv-btn" type="radio" name="file-type" value="TSV"> TSV</div>#}
-        </form>
- {#  Really dirty indentation below because textarea needed to be spaceless to give proper spacing  #}
-    <textarea id="csv" rows="{{ cards|length }}" cols="100">{% spaceless %}
+        <div class="row container">
+            <form action="">
+    {#            <div><input id="csv-btn" type="radio" name="file-type" value="CSV" checked="checked"> CSV</div>#}
+    {#            <div><input id="tsv-btn" type="radio" name="file-type" value="TSV"> TSV</div>#}
+            </form>
+     {#  Really dirty indentation below because textarea needed to be spaceless to give proper spacing  #}
+        <textarea id="csv" rows="{{ cards|length }}" cols="100">{% spaceless %}
 {% for card in cards %}{{ card.front }}, {{ card.back }}
 {% endfor %}{% endspaceless %}</textarea>
-{##}
-{#    <textarea id="tsv" rows="{{ cards|length }}" cols="100" style="display: none;">{% spaceless %}#}
-{#{% for card in cards %}{{ card.front }}     {{ card.back }}#}
-{#{% endfor %}{% endspaceless %}</textarea>#}
-{#  End of really dirty indentation  #}
-        <div>
-            <input id="back-btn" class="btn btn-default btn-md" value="Back"
-               onclick="window.location.href='{% url 'flashcard:show' set_id %}'">
+    {##}
+    {#    <textarea id="tsv" rows="{{ cards|length }}" cols="100" style="display: none;">{% spaceless %}#}
+    {#{% for card in cards %}{{ card.front }}     {{ card.back }}#}
+    {#{% endfor %}{% endspaceless %}</textarea>#}
+    {#  End of really dirty indentation  #}
+            <div>
+                <input id="back-btn" class="btn btn-default btn-md" value="Back"
+                   onclick="window.location.href='{% url 'flashcard:show' set_id %}'">
+            </div>
         </div>
-    </div>
-    <script>
-        function updateExport() {
-            console.log("Update Export");
-            if ($("input[id='csv-btn']").is(':checked')) {
-                $('#tsv').hide();
-                $('#csv').show();
-            } else if ($("input[id='tsv-btn']").is(':checked')) {
-                $('#csv').hide();
-                $('#tsv').show();
+        <script>
+            function updateExport() {
+                console.log("Update Export");
+                if ($("input[id='csv-btn']").is(':checked')) {
+                    $('#tsv').hide();
+                    $('#csv').show();
+                } else if ($("input[id='tsv-btn']").is(':checked')) {
+                    $('#csv').hide();
+                    $('#tsv').show();
+                }
             }
-        }
-    </script>
+        </script>
+    </div>
+
+
 
 {% endblock %}
 

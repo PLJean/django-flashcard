@@ -6,7 +6,6 @@
         #word-container, #answer-input {
             font-size: 24px;
         }
-
         .btn {
             display: inline;
             font-size: 20px;
@@ -16,10 +15,6 @@
             padding: 1%;
             border-width: 1px;
         }
-{#        #result-container  {#}
-{#            border-style: solid;#}
-{#            border-width: 1px;#}
-{#        }#}
         #learn-container {
             margin-right: 1%;
         }
@@ -76,13 +71,8 @@
         </div>
     </div>
 
+    <script src="{% static 'flashcard/js/learn.js' %}"></script>
     <script>
         window.onload=function() { playLearn({{ cards|safe }}); };
-
-        $('#answer-input').keypress(function(event) {
-            if (event.which == 13) {
-                answerLearn();
-            }
-        });
     </script>
 {% endblock %}

@@ -2,8 +2,7 @@
 
 This is a configurable flashcard application for Django with very easy installation.
 
-Here's an example website for [Spanish flashcards](http://thespanishcards.com) that I've been using to study for my Spanish exams. Here's the a
-blank version of the [web app](http://patrickjean.me/flashcard). This is what you'll get when you first install the app.
+Here's the a blank version of the [web app](http://patrickjean.me/flashcard). This is what you'll get when you first install the app.
 
 ## Django-Flashcard Features
 
@@ -18,9 +17,15 @@ blank version of the [web app](http://patrickjean.me/flashcard). This is what yo
 
 1) Clone the repo using `git clone https://github.com/PLJean/django-flashcard.git`.
 
-2) Run `python setup.py install`.
+2) Move all filed within django-flashcard into your main project folder.
 
-3) Add `flashcard` to your `INSTALLED_APPS` setting.
+```
+mv -rf django-flashcard/* my-project/
+```
+
+3) Run `python setup.py install`.
+
+4) Add `flashcard` to your `INSTALLED_APPS` setting.
 
 ```
 INSTALLED_APPS = (
@@ -29,15 +34,27 @@ INSTALLED_APPS = (
     ....,
 )
 ```
+5) Include the function `include` in urls.py from django.conf.urls
 
-4) Add the following to your projects url.py file, substituting q for whatever you want the base url to be.
+```
+from django.conf.urls import url, include
+```
+
+6) Add the following to your projects url.py file, substituting q for whatever you want the base url to be.
 
 ```
 urlpatterns = patterns('',
     ...
-    url(r'^q/', include('flashcard.urls')),
+    url(r'^', include('flashcard.urls')),
     ...
 )
+```
+
+7) Make all migrations
+
+```
+python manage.py makemigrations
+python manage.py migrate
 ```
 
 ## Credits

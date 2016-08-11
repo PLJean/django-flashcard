@@ -54,6 +54,8 @@ python manage.py makemigrations
 python manage.py migrate
 ```
 
+7) `python manage.py runserver`
+
 ## Credits
 
 Patrick Jean - patrickjean.me

@@ -3,9 +3,17 @@ var current_index = 1;
 var incorrect;
 var correct;
 
+// Adds ability to press enter to answer question
 $('#answer-input').keypress(function(event) {
     if (event.which == 13) {
         answerLearn();
+    }
+});
+
+// Adds ability to press enter to go to next question
+$('#next-btn').keypress(function(event) {
+    if (event.which == 13) {
+        nextLearn();
     }
 });
 
@@ -21,6 +29,7 @@ function playLearn(cards) {
     // Add empty card back to the original list
     cards.unshift(empty_card);
     current_cards = cards;
+
     $('#word-container').html(current_cards[current_index]['fields']['back']);
     $('#remaining-count').html(current_cards.length - 1);
     $('#correct-count').html(0);
@@ -28,7 +37,6 @@ function playLearn(cards) {
 }
 
 function answerLearn() {
-    // Increase index if in range
     var result;
     var question = current_cards[current_index]['fields']['back'];
     var answer = current_cards[current_index]['fields']['front'];
@@ -37,7 +45,7 @@ function answerLearn() {
     if($('#answer-input').val() == answer) {
         correct += 1;
         $('#correct-count').html(correct);
-        $('#next-container').html('<a id="answer-btn" class="btn btn-default" onclick="nextLearn()">Next</a>');
+        $('#next-container').html('<a id="next-btn" class="btn btn-default" onclick="nextLearn()">Next</a>');
         result = 'CORRECT!';
     } else {
         incorrect += 1;
@@ -62,8 +70,6 @@ function answerLearn() {
         $('#learn-container').hide();
         $('#result-container').show();
     }
-    // $('#back-content').html(current_cards[current_index]['fields']['back']);
-    // $('#card-index').html(current_index + " of " + (current_cards.length - 1));
 }
 
 function nextLearn() {
@@ -93,4 +99,5 @@ function nextLearn() {
         $('#next-container-end').html('<a id="redo-btn" class="btn btn-default" onclick="location.reload()">Redo</a>');
         $('#end-container').show();
     }
+
 }

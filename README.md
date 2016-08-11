@@ -20,12 +20,9 @@ Here's the a blank version of the [web app](http://patrickjean.me/flashcard). Th
 2) Move all filed within django-flashcard into your main project folder.
 
 ```
-mv -rf django-flashcard/* my-project/
+mv django-flashcard/* my-project/
 ```
-
-3) Run `python setup.py install`.
-
-4) Add `flashcard` to your `INSTALLED_APPS` setting.
+3) Add `flashcard` to your `INSTALLED_APPS` setting.
 
 ```
 INSTALLED_APPS = (
@@ -34,13 +31,13 @@ INSTALLED_APPS = (
     ....,
 )
 ```
-5) Include the function `include` in urls.py from django.conf.urls
+4) Include the function `include` in urls.py from django.conf.urls
 
 ```
 from django.conf.urls import url, include
 ```
 
-6) Add the following to your projects url.py file, substituting q for whatever you want the base url to be.
+5) Add the following to your projects url.py file, substituting q for whatever you want the base url to be.
 
 ```
 urlpatterns = patterns('',
@@ -50,7 +47,7 @@ urlpatterns = patterns('',
 )
 ```
 
-7) Make all migrations
+6) Make all migrations
 
 ```
 python manage.py makemigrations

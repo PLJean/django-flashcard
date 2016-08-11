@@ -11,7 +11,7 @@ Here's the a blank version of the [web app](http://patrickjean.me/flashcard). Th
 * Learn flash card information by flipping through the cards. Flipping animation provided using jQuery [Flip](https://nnattawat.github.io/flip/).
 * Learn flash card information by being given a word and typing it the answer that corresponds with that word.
 * Import set from other applications such as Excel and Quizlet
-* Export set as a TSV or a CSV that can be used later in other applications
+* Export set as a CSV that can be used later in other applications
 
 ## Installation
 

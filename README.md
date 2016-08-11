@@ -1,6 +1,6 @@
 # Django-Flashcard
 
-This is a configurable flashcard application for Django with very easy installation.
+This is a configurable flashcard application for Django with very easy installation. Installation instructions are below (after images).
 
 Here's the a blank version of the [web app](http://patrickjean.me/flashcard). This is what you'll get when you first install the app.
 
@@ -12,6 +12,19 @@ Here's the a blank version of the [web app](http://patrickjean.me/flashcard). Th
 * Learn flash card information by being given a word and typing it the answer that corresponds with that word.
 * Import set from other applications such as Excel and Quizlet
 * Export set as a CSV that can be used later in other applications
+
+## Images 
+![Alt Text](https://github.com/PLJean/django-flashcard/blob/master/flashcard/images/index.png)
+
+![Alt Text](https://github.com/PLJean/django-flashcard/blob/master/flashcard/images/set.png)
+
+![Alt Text](https://github.com/PLJean/django-flashcard/blob/master/flashcard/images/edit.png)
+
+![Alt Text](https://github.com/PLJean/django-flashcard/blob/master/flashcard/images/flip.png)
+
+![Alt Text](https://github.com/PLJean/django-flashcard/blob/master/flashcard/images/flipping.png)
+
+![Alt Text](https://github.com/PLJean/django-flashcard/blob/master/flashcard/images/answering.png)
 
 ## Installation
 

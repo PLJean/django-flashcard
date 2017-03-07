@@ -6,7 +6,7 @@
         #word-container, #answer-input {
             font-size: 24px;
         }
-        .btn {
+        #answer-btn {
             display: inline;
             font-size: 20px;
         }
@@ -32,6 +32,11 @@
     <div class="container">
           <div id="set-title">
             <span id="id_name">Learn {{ title }}</span>
+            <input id="learn-btn" class="btn btn-default btn-md" value="View"
+            <input id="learn-btn" class="btn btn-default btn-md" value="View"
+                   onclick="window.location.href='{% url 'flashcard:show' set_id %}'" >
+            <input id="flip-btn" class="btn btn-default btn-md" value="Flip"
+                   onclick="window.location.href='{% url 'flashcard:flip' set_id %}'" >
         </div>
     </div>
     <div class="container">

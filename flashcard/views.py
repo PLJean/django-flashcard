@@ -1,27 +1,19 @@
-from django.http import HttpResponse
-from django.contrib import messages
 from .models import Set, Card
 from django.shortcuts import render
 from .forms import CardForm, SetForm
 from django.forms import formset_factory
 from django.core import serializers
 from random import randrange
-from .constants import ADMIN_BAR
-import logging
-
-# import django
-# django.setup()
+from django.http import HttpResponse
 
 
 all_sets = {}
 current_cards = {}
 current_set_id = -1
 empty_card_index = 0
+admin = False
 
-# logging.basicConfig(level=logging.INFO)
-# logger = logging.getLogger(__name__)
-
-
+# Showing the page
 def index(request):
     global all_sets
     all_sets = Set.objects.all()
@@ -30,25 +22,26 @@ def index(request):
         # Subtract one from the length for the empty card.
         set_lens.append(len(set.card_set.all()) - 1)
 
-    return render(request, 'flashcard/index.html', {'all_sets' : all_sets, 'set_lens': set_lens})
+    return render(request, 'flashcard/index.html', {'all_sets' : all_sets, 'set_lens': set_lens, 'admin': admin})
 
-
+# Flashcard set page
 def show_set(request, set_id):
     global all_sets, current_cards, current_set_id
     set = Set.objects.get(id=set_id)
     current_cards = set.card_set.all()
     title = set.name
-    # if len(current_cards) == 0:
 
-    # logger.info(msg='sup')
     current_set_id = set_id
 
     return render(request, 'flashcard/set.html', {
-        'set_id': set_id, 'cards': current_cards, 'title': title, 'empty_card_index': 0, 'color': set.color
+        'set_id': set_id, 'cards': current_cards, 'title': title, 'empty_card_index': 0, 'color': set.color, 'admin': admin
     })
 
 
 def create_set(request):
+    if admin is False:
+        return HttpResponse('')
+
     def random_color():
         color = '%x' % randrange(16777215)
         c_len = len(color)
@@ -75,12 +68,15 @@ def create_set(request):
 
     return render(request, 'flashcard/edit.html', {
         'cards': current_cards, 'set_id': set_id, 'title_form': title_form, 'formset': formset,
-        'empty_card_index': empty_card_index, 'create': 1, 'color': color
+        'empty_card_index': empty_card_index, 'create': 1, 'color': color, 'admin': admin
     })
 
 
 def edit_set(request, set_id):
     global current_set_id
+    if admin is False:
+        return HttpResponse('')
+
     set = Set.objects.get(id=set_id)
     current_cards = set.card_set.all()
     card_form_set = formset_factory(CardForm)
@@ -104,7 +100,7 @@ def edit_set(request, set_id):
     # formset.is_valid()
     return render(request, 'flashcard/edit.html', {
         'set_id': current_set_id, 'title_form': title_form, 'formset': formset,
-        'empty_card_index': empty_card_index, 'create': 0, 'color': set.color
+        'empty_card_index': empty_card_index, 'create': 0, 'color': set.color, 'admin': admin
     })
 
 
@@ -158,7 +154,7 @@ def save_set(request, set_id, create):
 def flip(request, set_id):
     flashcards = serializers.serialize("json", Set.objects.get(id=set_id).card_set.all())
     return render(request, 'flashcard/flip.html', {
-        'cards': flashcards, 'set_id': set_id,
+        'cards': flashcards, 'set_id': set_id, 'admin': admin
     })
 
 
@@ -166,7 +162,7 @@ def learn(request, set_id):
     flashcards_data = Set.objects.get(id=set_id)
     flashcards = serializers.serialize("json", flashcards_data.card_set.all())
     return render(request, 'flashcard/learn.html', {
-        'title': flashcards_data.name, 'cards': flashcards, 'set_id': set_id,
+        'title': flashcards_data.name, 'cards': flashcards, 'set_id': set_id, 'admin': admin
     })
 
 
@@ -174,6 +170,6 @@ def export(request, set_id):
     flashcards_data = Set.objects.get(id=set_id)
     flashcards = flashcards_data.card_set.all()
     return render(request, 'flashcard/export.html', {
-        'title': flashcards_data.name, 'cards': flashcards[1:], 'set_id': set_id
+        'title': flashcards_data.name, 'cards': flashcards[1:], 'set_id': set_id, 'admin': admin
     })
 

@@ -1,9 +1,9 @@
+var empty_card = null;
+
 $(document).ready(function () {
-    var empty_card = null;
-    var empty_card_index = 0;
+    // Allows for cards to be deleted from edit.html
     $(document).on('click', '.delete-card-btn', function() {
         var delCard = $(this).parent();
-        console.log(delCard);
         var delCounter = delCard.find('.counter');
         var allCards = $('.card');
 
@@ -16,18 +16,11 @@ $(document).ready(function () {
 
         delCard.remove();
     });
-    
-    $(document).on('click', 'delete-set-btn', function() {
-        var delSet = $(this).parent();
-        console.log(delSet);
-    })
 });
 
 function setEmptyCard(index) {
-    console.log('Setting up empty card.');
     empty_card = $('.card').eq(index);
     empty_card.attr('id', 'empty_card');
-    // console.log(empty_card);
 }
 
 function newCard() {

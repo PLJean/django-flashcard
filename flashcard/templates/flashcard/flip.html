@@ -13,6 +13,15 @@
 
     </style>
 
+    <div class="container">
+        <div id="set-title">
+            <span id="id_name">Flip {{ title }}</span>
+            <input id="learn-btn" class="btn btn-default btn-md" value="Learn"
+                   onclick="window.location.href='{% url 'flashcard:learn' set_id %}'" >
+            <input id="flip-btn" class="btn btn-default btn-md" value="View"
+                   onclick="window.location.href='{% url 'flashcard:show' set_id %}'" >
+        </div>
+    </div>
     <div class="container-fluid">
         <div class="card row">
             <div class="col-xs-offset-2 col-sm-offset-2 col-md-offset-2 col-lg-offset-2

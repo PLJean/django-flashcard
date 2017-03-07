@@ -42,9 +42,13 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
       </ul>
+
       <ul class="nav navbar-nav navbar-right">
+          {% if admin == True %}
+
         <li><a href="{% url 'flashcard:index' %}" class="btn btn-nav">Your Sets</a></li>
         <li><a href="{% url 'flashcard:create' %}" class="btn btn-nav">Create</a></li>
+          {% endif %}
       </ul>
     </div>
   </div>

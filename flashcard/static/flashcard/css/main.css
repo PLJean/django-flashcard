@@ -1,15 +1,128 @@
 #flipNext {
 }
 .card {
-    margin-bottom: 3.5%;
-
+    margin-bottom: 600px;
 }
+@media (max-width: 3300px) {
+    .card {
+        margin-bottom: 500px;
+    }
+}
+@media (max-width: 2680px) {
+    .card {
+        margin-bottom: 430px;
+    }
+}
+@media (max-width: 2400px) {
+    .card {
+        margin-bottom: 360px;
+    }
+}
+ @media (max-width: 2000px) {
+    .card {
+        margin-bottom: 320px;
+    }
+}
+@media (max-width: 1180px) {
+    .card {
+        margin-bottom: 370px;
+    }
+}
+@media (max-width: 1080px) {
+    .card {
+        margin-bottom: 330px;
+    }
+}
+@media (max-width: 992px) {
+    .card {
+        margin-bottom: 550px;
+    }
+}
+@media (max-width: 900px) {
+    .card {
+        margin-bottom: 500px;
+    }
+}
+@media (max-width: 860px) {
+    .card {
+        margin-bottom: 480px;
+    }
+}
+@media (max-width: 800px) {
+    .card {
+        margin-bottom: 460px;
+    }
+}
+@media (max-width: 740px) {
+    .card {
+        margin-bottom: 420px;
+    }
+}
+@media (max-width: 700px) {
+    .card {
+        margin-bottom: 390px;
+    }
+}
+@media (max-width: 640px) {
+    .card {
+        margin-bottom: 360px;
+    }
+}
+@media (max-width: 580px) {
+    .card {
+        margin-bottom: 330px;
+    }
+}
+@media (max-width: 480px) {
+    .card {
+        margin-bottom: 290px;
+    }
+}
+@media (max-width: 400px) {
+    .card {
+        margin-bottom: 260px;
+    }
+}
+@media (max-width: 300px) {
+    .card {
+        margin-bottom: 230px;
+    }
+}
+@media (max-width: 200px) {
+    .card {
+        margin-bottom: 190px;
+    }
+}
+
+
+
+
+
+
 .front {
     padding: 25%;
     border-style: solid;
     border-radius: 15px;
     border-width: 1px;
     font-size: 28px;
+}
+
+.first {
+    position: absolute;
+    margin-top: 0;
+    margin-left: 0;
+}
+
+.second {
+    position: absolute;
+    margin-top: 1.5%;
+    margin-left: 1.5%;
+}
+
+.third {
+    position: absolute;
+    margin-top: 3%;
+    margin-left: 3%;
 }
 
 .back {
@@ -99,5 +212,9 @@
 .btn {
     width: 10%;
 }
+
+
+
+
 
 

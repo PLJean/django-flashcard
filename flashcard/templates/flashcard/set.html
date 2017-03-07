@@ -31,10 +31,13 @@
                 <script>window.onload=function() { setEmptyCard({{ empty_card_index}}); }</script>
             </tbody>
         </table>
+    {% if admin == True %}
+
         <input id="edit-btn" class="btn btn-default btn-md" value="Edit"
                onclick="window.location.href='{% url 'flashcard:edit' set_id %}'">
         <input id=export-btn" class="btn btn-default btn-md" value="Export"
                onclick="window.location.href='{% url 'flashcard:export' set_id %}'">
+    {% endif %}
     </div>
 
 
